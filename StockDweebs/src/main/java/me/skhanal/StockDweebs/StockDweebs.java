@@ -18,7 +18,7 @@ public class StockDweebs {
 		JSONObject jsonObject = null;
 		
 		try {
-			jsonObject = (JSONObject) parser.parse(new FileReader("C:\\Users\\subod\\Documents\\GitHub\\stockdweebs-bot\\StockDweebs\\src\\main\\java\\me\\skhanal\\StockDweebs\\token.json"));
+			jsonObject = (JSONObject) parser.parse(new FileReader("C:\\Users\\subod\\Documents\\GitHub\\stockdweebs-bot\\StockDweebs\\token.json"));
 			token = (String) jsonObject.get("token");
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
