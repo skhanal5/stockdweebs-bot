@@ -38,6 +38,9 @@ public class StockDweebs {
 		} catch (LoginException e){
 			e.printStackTrace();
 		} 
+		
+		
+		System.out.println("test");
 	} 
 	
 }
