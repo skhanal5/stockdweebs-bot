@@ -20,6 +20,19 @@ public class MyListener extends ListenerAdapter{
 		if(e.getMessage().getContentRaw().equals("!invite")) {
 			e.getChannel().sendMessage(String.format(url, e.getJDA().getSelfUser().getId())).queue();;
 		}
+		
+		if(e.getMessage().getContentRaw().equals("!invite")) {
+			e.getChannel().sendMessage(String.format(url, e.getJDA().getSelfUser().getId())).queue();;
+		}
+		
+		if(e.getMessage().getContentRaw().equals("!youtube")) {
+			e.getChannel().sendMessage("Official StockDweeb's YouTube Channel: ").queue();
+		}
+		
+		if(e.getMessage().getContentRaw().equals("!twitter")) {
+			e.getChannel().sendMessage("Official StockDweeb's Twitter Profile: ").queue();
+		}
+	
 	}
 
 }
