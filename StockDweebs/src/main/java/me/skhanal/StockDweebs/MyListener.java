@@ -27,12 +27,12 @@ public class MyListener extends ListenerAdapter {
 		}
 
 		if (e.getMessage().getContentRaw().equals("!youtube")) {
-			String input = e.getMessageId();
+			String input = e.getMessage().getContentRaw();
 			e.getChannel().sendMessage(createEmbed(input)).queue();
 		}
 
 		if (e.getMessage().getContentRaw().equals("!twitter")) {
-			String input = e.getMessageId();
+			String input = e.getMessage().getContentRaw();
 			e.getChannel().sendMessage(createEmbed(input)).queue();
 		}
 
@@ -41,7 +41,7 @@ public class MyListener extends ListenerAdapter {
 	public MessageEmbed createEmbed(String s) {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		
-		if (s.equals("Youtube")) {
+		if (s.equals("!youtube")) {
 			embedBuilder.setAuthor("Youtube", "https://www.youtube.com/", "https://www.sfcg.org/wp-content/uploads/2016/11/youtube-flat.png");
 			embedBuilder.setDescription("Every Sunday at 10:00 AM EST - weekly analysis on S&P 500 / Dow Jones Industrial Average / Nasdaq\r\n" + 
 					"\r\n" + 
