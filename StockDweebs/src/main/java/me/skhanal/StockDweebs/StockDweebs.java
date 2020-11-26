@@ -11,36 +11,38 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
 public class StockDweebs {
-	public static void main(String[]args) {
-	
-		JSONParser parser = new JSONParser();
+
+	public static void main(String[] args) {
+
 		String token = "";
+
+		JSONParser parser = new JSONParser();
 		JSONObject jsonObject = null;
-		
+
 		try {
-			jsonObject = (JSONObject) parser.parse(new FileReader("C:\\Users\\subod\\Documents\\GitHub\\stockdweebs-bot\\StockDweebs\\src\\main\\java\\me\\skhanal\\StockDweebs\\token.json"));
+			jsonObject = (JSONObject) parser.parse(new FileReader(
+					"C:\\Users\\subod\\Documents\\GitHub\\stockdweebs-bot\\StockDweebs\\src\\main\\java\\me\\skhanal\\StockDweebs\\token.json"));
 			token = (String) jsonObject.get("token");
-		} catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		} catch(ParseException e) {
+		} catch (ParseException e) {
 			e.printStackTrace();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		JDABuilder jdaBuilder = JDABuilder.createDefault(token);
 		JDA jda = null;
-		
+		MyListener listener = new MyListener();
+		jdaBuilder.addEventListeners(listener);
+
 		try {
 			jda = jdaBuilder.build();
-		} catch (LoginException e){
+		} catch (LoginException e) {
 			e.printStackTrace();
-		} 
-		
-		
-		System.out.println("test");
-	} 
-	
+		}
+	}
+
 }
