@@ -1,14 +1,17 @@
 package me.skhanal.StockDweebs;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileReader;
+import java.io.IOException;
+
 import javax.security.auth.login.LoginException;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
 public class StockDweebs {
 
@@ -27,8 +30,6 @@ public class StockDweebs {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -37,10 +38,16 @@ public class StockDweebs {
 		JDA jda = null;
 		MyListener listener = new MyListener();
 		jdaBuilder.addEventListeners(listener);
+		jdaBuilder.setActivity(Activity.watching("StockDweeb's Posts"));
 
 		try {
 			jda = jdaBuilder.build();
 		} catch (LoginException e) {
+			e.printStackTrace();
+		}
+		try {
+			jda.awaitReady();
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
