@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
-public class StockDweebs {
+public class Driver {
 
 	public static void main(String[] args) {
 
@@ -36,7 +36,7 @@ public class StockDweebs {
 
 		JDABuilder jdaBuilder = JDABuilder.createDefault(token);
 		JDA jda = null;
-		MyListener listener = new MyListener();
+		CommandListener listener = new CommandListener();
 		jdaBuilder.addEventListeners(listener);
 		jdaBuilder.setActivity(Activity.watching("StockDweeb's Posts"));
 
