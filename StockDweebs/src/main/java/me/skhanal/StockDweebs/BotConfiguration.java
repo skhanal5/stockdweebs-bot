@@ -12,10 +12,8 @@ public class BotConfiguration extends ListenerAdapter {
 
 	@Override
 	public void onGuildJoin(GuildJoinEvent e) {
-
 		Guild currGuild = e.getGuild();
 		currGuild.getDefaultChannel().sendMessage(setupEmbed(e)).queue();
-	
 	}
 
 	public MessageEmbed setupEmbed(GuildJoinEvent e) {
