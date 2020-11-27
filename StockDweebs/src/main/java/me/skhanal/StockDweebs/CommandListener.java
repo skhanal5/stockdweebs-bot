@@ -100,7 +100,7 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
 			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
-			embedBuilder.setTitle("Add this bot to your other servers!", "https://discord.com/api/oauth2/authorize?client_id=780691100964356146&permissions=2147483639&scope=bot");
+			embedBuilder.setTitle("Add this bot to your other servers!", "https://discord.com/api/oauth2/authorize?client_id=780691100964356146&permissions=8&scope=bot");
 		} else if (s.equals("!premium")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
