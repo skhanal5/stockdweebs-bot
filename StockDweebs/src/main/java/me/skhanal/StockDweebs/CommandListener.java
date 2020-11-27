@@ -1,15 +1,12 @@
 package me.skhanal.StockDweebs;
 
 import java.awt.Color;
-
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class CommandListener extends ListenerAdapter {
-	private String url = "https://discord.com/oauth2/authorize?client_id=%s&permissions=523328&scope=bot";
-
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
 		if (e.getMessage().getContentRaw().equals("!watchlist")) {
@@ -21,8 +18,8 @@ public class CommandListener extends ListenerAdapter {
 		}
 
 		if (e.getMessage().getContentRaw().equals("!invite")) {
-			e.getChannel().sendMessage(String.format(url, e.getJDA().getSelfUser().getId())).queue();
-			;
+			String input = e.getMessage().getContentRaw();
+			e.getChannel().sendMessage(createEmbed(input)).queue();
 		}
 
 		if (e.getMessage().getContentRaw().equals("!youtube")) {
@@ -36,7 +33,8 @@ public class CommandListener extends ListenerAdapter {
 		}
 		
 		if(e.getMessage().getContentRaw().equals("!premium")) {
-			e.getChannel().sendMessage("Premium subscription service will be coming soon. Stay tuned for updates on my social media!").queue();
+			String input = e.getMessage().getContentRaw();
+			e.getChannel().sendMessage(createEmbed(input)).queue();
 		}
 		
 		if(e.getMessage().getContentRaw().equals("!help")) {
@@ -44,7 +42,11 @@ public class CommandListener extends ListenerAdapter {
 			e.getChannel().sendMessage(createEmbed(input)).queue();
 		}
 		
+		if(e.getMessage().getContentRaw().equals("!setup")) {
+			String input = e.getMessage().getContentRaw();
+			e.getChannel().sendMessage(createEmbed(input)).queue();
 		}
+	}
 
 	public MessageEmbed createEmbed(String s) {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
@@ -77,7 +79,7 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setTitle("StockDweebs Twitter", "https://twitter.com/StockDweebs");
 			embedBuilder.setColor(Color.CYAN);
 			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
-		} else {
+		} else if (s.equals("!help")){
 			embedBuilder.setAuthor("StockDweebs Command List", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
@@ -87,6 +89,21 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.addField("Alerts", "```\n !alerts```", true);
 			embedBuilder.addField("Twitter", "```\n !twitter```", true);
 			embedBuilder.addField("Youtube", "```\n !youtube```", true);
+		} else if (s.equals("!setup")) {
+			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
+			embedBuilder.setColor(Color.MAGENTA);
+			embedBuilder.setDescription("To improve your experience with our services please configure this bot with the following settings.");
+			embedBuilder.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
+			embedBuilder.addField("!alerts [on/off]", "```\n Turn on post notifications from the StockDweebs twitter and  youtube page. ```", false);
+		} else if (s.equals("!invite")) {
+			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
+			embedBuilder.setColor(Color.MAGENTA);
+			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
+			embedBuilder.setTitle("Add this bot to your other servers!", "https://discord.com/api/oauth2/authorize?client_id=780691100964356146&permissions=2147483639&scope=bot");
+		} else if (s.equals("!premium")) {
+			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
+			embedBuilder.setColor(Color.MAGENTA);
+			embedBuilder.setDescription("Premium subscription service will be coming soon. Stay tuned for updates on my social media!");
 		}
 		return embedBuilder.build();
 	}
