@@ -37,7 +37,7 @@ public class CommandListener extends ListenerAdapter {
 			e.getChannel().sendMessage(createEmbed(input)).queue();
 		}
 		
-		if(e.getMessage().getContentRaw().equals("!help")) {
+		if(e.getMessage().getContentRaw().equals("!commands")) {
 			String input = e.getMessage().getContentRaw();
 			e.getChannel().sendMessage(createEmbed(input)).queue();
 		}
@@ -79,7 +79,7 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setTitle("StockDweebs Twitter", "https://twitter.com/StockDweebs");
 			embedBuilder.setColor(Color.CYAN);
 			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
-		} else if (s.equals("!help")){
+		} else if (s.equals("!commands")){
 			embedBuilder.setAuthor("StockDweebs Command List", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
@@ -92,9 +92,10 @@ public class CommandListener extends ListenerAdapter {
 		} else if (s.equals("!setup")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
-			embedBuilder.setDescription("To improve your experience with our services please configure this bot with the following settings.");
+			embedBuilder.setDescription("To improve your experience with our services please configure this bot with the following settings. \n \n If you have any questions or suggestions in regards to improving this bot, please contact [us](https://github.com/skhanal5/stockdweebs-bot/issues).");
 			embedBuilder.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
 			embedBuilder.addField("!alerts [on/off]", "```\n Turn on post notifications from the StockDweebs twitter and  youtube page. ```", false);
+			embedBuilder.addField("!commands", "```\n Type this to view a full list of commands. ```", false);
 		} else if (s.equals("!invite")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
@@ -103,7 +104,7 @@ public class CommandListener extends ListenerAdapter {
 		} else if (s.equals("!premium")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
-			embedBuilder.setDescription("Premium subscription service will be coming soon. Stay tuned for updates on my social media!");
+			embedBuilder.setDescription("Premium subscription service will be coming soon. Stay tuned for updates on my [social media](https://twitter.com/StockDweebs)!");
 		}
 		return embedBuilder.build();
 	}
