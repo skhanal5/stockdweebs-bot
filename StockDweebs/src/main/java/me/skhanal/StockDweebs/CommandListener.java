@@ -8,8 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class CommandListener extends ListenerAdapter {
-
-	private String url = "https://discord.com/oauth2/authorize?client_id=%s&scope=bot";
+	private String url = "https://discord.com/oauth2/authorize?client_id=%s&permissions=523328&scope=bot";
 
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
