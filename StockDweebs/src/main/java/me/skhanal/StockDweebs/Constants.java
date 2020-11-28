@@ -7,10 +7,10 @@ import java.io.IOException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Token {
+public class Constants {
 
 	private static String token = "";
-	public Token() {
+	public Constants() {
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObject = null;
 

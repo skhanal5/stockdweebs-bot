@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 public class Driver{
 
 	public static void main(String[] args) {
-		Token token = new Token();
+		Constants token = new Constants();
 		
 		List<GatewayIntent> gatewayIntents = new ArrayList<>();
 		gatewayIntents.add(GatewayIntent.GUILD_MEMBERS);
