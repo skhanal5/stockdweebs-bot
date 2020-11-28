@@ -18,33 +18,27 @@ public class CommandListener extends ListenerAdapter {
 		}
 
 		if (e.getMessage().getContentRaw().equals("!invite")) {
-			String input = e.getMessage().getContentRaw();
-			e.getChannel().sendMessage(createEmbed(input)).queue();
+			e.getChannel().sendMessage(createEmbed("!invite")).queue();
 		}
 
 		if (e.getMessage().getContentRaw().equals("!youtube")) {
-			String input = e.getMessage().getContentRaw();
-			e.getChannel().sendMessage(createEmbed(input)).queue();
+			e.getChannel().sendMessage(createEmbed("!youtube")).queue();
 		}
 
 		if (e.getMessage().getContentRaw().equals("!twitter")) {
-			String input = e.getMessage().getContentRaw();
-			e.getChannel().sendMessage(createEmbed(input)).queue();
+			e.getChannel().sendMessage(createEmbed("!twitter")).queue();
 		}
 		
 		if(e.getMessage().getContentRaw().equals("!premium")) {
-			String input = e.getMessage().getContentRaw();
-			e.getChannel().sendMessage(createEmbed(input)).queue();
+			e.getChannel().sendMessage(createEmbed("!premium")).queue();
 		}
 		
 		if(e.getMessage().getContentRaw().equals("!commands")) {
-			String input = e.getMessage().getContentRaw();
-			e.getChannel().sendMessage(createEmbed(input)).queue();
+			e.getChannel().sendMessage(createEmbed("!commands")).queue();
 		}
 		
 		if(e.getMessage().getContentRaw().equals("!setup")) {
-			String input = e.getMessage().getContentRaw();
-			e.getChannel().sendMessage(createEmbed(input)).queue();
+			e.getChannel().sendMessage(createEmbed("!setup")).queue();
 		}
 	}
 

@@ -26,6 +26,9 @@ public class Driver{
 		BotConfiguration config = new BotConfiguration();
 		jdaBuilder.addEventListeners(config);
 		
+		AlertListener alert = new AlertListener();
+		jdaBuilder.addEventListeners(alert);
+		
 		jdaBuilder.setActivity(Activity.watching("StockDweeb's Posts"));
 
 		try {
