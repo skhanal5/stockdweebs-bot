@@ -25,6 +25,7 @@ public class Constants {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public String getToken() {
