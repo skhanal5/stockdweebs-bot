@@ -26,9 +26,13 @@ public class ChannelListener extends ListenerAdapter {
 			
 			try {e.getGuild().getTextChannelById(CHANNEL_ID).sendMessage("Yo").queue();
 				e.getChannel().sendMessage("Success").queue();
-			} catch (NumberFormatException q) {
-				e.getChannel().sendMessage("Invalid Channel Name").queue();
-			}
+			} catch (NumberFormatException g) {
+				e.getChannel().sendMessage("Invalid or Nonexistent Channel Name").queue();
+			} catch (IllegalArgumentException g) {
+				e.getChannel().sendMessage("Invalid or Nonexistent Channel Name").queue();
+			} catch (NullPointerException g) {
+				e.getChannel().sendMessage("Invalid or Nonexistent Channel Name").queue();
+			} 
 		}
 		
 	}
