@@ -1,6 +1,7 @@
 package me.skhanal.StockDweebs;
 
 import java.awt.Color;
+import me.skhanal.StockDweebs.ChannelListener;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -10,35 +11,27 @@ public class CommandListener extends ListenerAdapter {
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
-		if (e.getMessage().getContentRaw().equals("!watchlist")) {
+		
+		
+		if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (ChannelListener.CHANNEL_ID==null)){
+			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and posts on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
+		} else if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (!(e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)))) {
+			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + ChannelListener.CHANNEL_INPUT + " channel. Please use this command in that channel").queue();
+		} else if (e.getMessage().getContentRaw().equals("!watchlist") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			e.getChannel().sendMessage("This week's watchlist: ").queue();
-		}
-
-		if (e.getMessage().getContentRaw().equals("!stockpicks")) {
+		} else if (e.getMessage().getContentRaw().equals("!stockpicks") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			e.getChannel().sendMessage("This week's stockpicks: ").queue();
-		}
-
-		if (e.getMessage().getContentRaw().equals("!invite")) {
+		} else if (e.getMessage().getContentRaw().equals("!invite") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			e.getChannel().sendMessage(createEmbed("!invite")).queue();
-		}
-
-		if (e.getMessage().getContentRaw().equals("!youtube")) {
+		} else if (e.getMessage().getContentRaw().equals("!youtube") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			e.getChannel().sendMessage(createEmbed("!youtube")).queue();
-		}
-
-		if (e.getMessage().getContentRaw().equals("!twitter")) {
+		} else if (e.getMessage().getContentRaw().equals("!twitter") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			e.getChannel().sendMessage(createEmbed("!twitter")).queue();
-		}
-		
-		if(e.getMessage().getContentRaw().equals("!premium")) {
+		} else if(e.getMessage().getContentRaw().equals("!premium") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			e.getChannel().sendMessage(createEmbed("!premium")).queue();
-		}
-		
-		if(e.getMessage().getContentRaw().equals("!commands")) {
+		} else if(e.getMessage().getContentRaw().equals("!commands")) {
 			e.getChannel().sendMessage(createEmbed("!commands")).queue();
-		}
-		
-		if(e.getMessage().getContentRaw().equals("!setup")) {
+		} else if(e.getMessage().getContentRaw().equals("!setup")) {
 			e.getChannel().sendMessage(createEmbed("!setup")).queue();
 		}
 	}
@@ -78,12 +71,13 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setAuthor("StockDweebs Command List", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
-			embedBuilder.addField("Weekly Watchlist", "```\n !watchlist```", true);
-			embedBuilder.addField("Weekly Stockpick", "```\n !stockpicks```", true);
-			embedBuilder.addField("Premium Membership", "```\n !premium```", true);
-			embedBuilder.addField("Alerts", "```\n !alerts```", true);
-			embedBuilder.addField("Twitter", "```\n !twitter```", true);
-			embedBuilder.addField("Youtube", "```\n !youtube```", true);
+			embedBuilder.addField("Weekly Watchlist", "```\n !watchlist```", false);
+			embedBuilder.addField("Weekly Stockpicks", "```\n !stockpicks```", false);
+			embedBuilder.addField("Premium Membership", "```\n !premium```", false);
+			embedBuilder.addField("Alerts", "```\n !alerts [on/off]```", false);
+			embedBuilder.addField("Twitter", "```\n !twitter```", false);
+			embedBuilder.addField("Youtube", "```\n !youtube```", false);
+			embedBuilder.addField("Invite this bot", "```\n !invite```", false);
 		} else if (s.equals("!setup")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
