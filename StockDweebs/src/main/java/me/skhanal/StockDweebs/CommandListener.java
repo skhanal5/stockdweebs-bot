@@ -77,7 +77,7 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.addField("Alerts", "```\n !alerts [on/off]```", false);
 			embedBuilder.addField("Twitter", "```\n !twitter```", false);
 			embedBuilder.addField("Youtube", "```\n !youtube```", false);
-			embedBuilder.addField("Invite this bot", "```\n !invite```", false);
+			embedBuilder.addField("Invite this bot to other servers!", "```\n !invite```", false);
 		} else if (s.equals("!setup")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);

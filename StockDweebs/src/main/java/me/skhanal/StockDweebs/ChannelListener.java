@@ -15,7 +15,10 @@ public class ChannelListener extends ListenerAdapter {
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
 		
-		if(e.getMessage().getContentRaw().startsWith("!setchannel")) {
+		
+		if (e.getMessage().getContentRaw().equals("!setchannel")) {
+			e.getChannel().sendMessage("Invalid command or channel name. To use this command type !setchannel and the channel name following that statement with a space. If you need additional assistance, refer to !setup for help.").queue();
+		} else if(e.getMessage().getContentRaw().startsWith("!setchannel")) {
 			CHANNEL_INPUT = e.getMessage().getContentRaw().substring(12,e.getMessage().getContentRaw().length());
 			CHANNEL_LIST = e.getGuild().getChannels();
 			for(GuildChannel channel: CHANNEL_LIST) {
@@ -34,7 +37,7 @@ public class ChannelListener extends ListenerAdapter {
 			} catch (NullPointerException g) {
 				e.getChannel().sendMessage("Invalid command or channel name. To use this command type !setchannel and the channel name following that statement with a space. If you need additional assistance, refer to !setup for help.").queue();
 			} 
-		}
 		
+		}
 	}
 }
