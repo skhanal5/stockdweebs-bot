@@ -14,13 +14,15 @@ public class AlertListener extends ListenerAdapter {
 		
 		if (e.getMessage().getContentRaw().equals("!alerts")) {
 			e.getChannel().sendMessage("Invalid command. To use this command type !alerts and either \"on\" or \"off\" (without quotes) following that statement with a space. If you need additional assistance, refer to !setup for help").queue();
-		} else if ((e.getMessage().getContentRaw().toLowerCase().matches("!alerts on|!alerts off")) && (ChannelListener.CHANNEL_ID==null)) {
+		} else if (e.getMessage().getContentRaw().startsWith("!alerts") && ((!(e.getMessage().getContentRaw().endsWith(" on"))) && (!(e.getMessage().getContentRaw().endsWith(" off"))))){
+			e.getChannel().sendMessage("Invalid command. To use this command type !alerts and either \"on\" or \"off\" (without quotes) following that statement with a space. If you need additional assistance, refer to !setup for help").queue();
+		} else if ((e.getMessage().getContentRaw().matches("!alerts on|!alerts off")) && (ChannelListener.CHANNEL_ID==null)) {
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and posts on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
-		} else if ((e.getMessage().getContentRaw().toLowerCase().matches("!alerts on|!alerts off")) && (!(e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)))) {
+		} else if ((e.getMessage().getContentRaw().matches("!alerts on|!alerts off")) && (!(e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)))) {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + ChannelListener.CHANNEL_INPUT + " channel. Please use this command in that channel").queue();
-		} else if (e.getMessage().getContentRaw().toLowerCase().equals("!alerts on") && e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)) {
+		} else if (e.getMessage().getContentRaw().equals("!alerts on") && e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)) {
 			e.getChannel().sendMessage(alertEmbed("!alerts on", e)).queue();
-		} else if (e.getMessage().getContentRaw().toLowerCase().equals("!alerts off") && e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)) {
+		} else if (e.getMessage().getContentRaw().equals("!alerts off") && e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)) {
 			e.getChannel().sendMessage(alertEmbed("!alerts off", e)).queue();
 		}
 	}

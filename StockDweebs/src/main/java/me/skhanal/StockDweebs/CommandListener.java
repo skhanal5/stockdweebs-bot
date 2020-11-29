@@ -14,7 +14,7 @@ public class CommandListener extends ListenerAdapter {
 		
 		
 		if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (ChannelListener.CHANNEL_ID==null)){
-			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and posts on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
+			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
 		} else if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (!(e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)))) {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + ChannelListener.CHANNEL_INPUT + " channel. Please use this command in that channel").queue();
 		} else if (e.getMessage().getContentRaw().equals("!watchlist") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
@@ -77,7 +77,7 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.addField("Alerts", "```\n !alerts [on/off]```", false);
 			embedBuilder.addField("Twitter", "```\n !twitter```", false);
 			embedBuilder.addField("Youtube", "```\n !youtube```", false);
-			embedBuilder.addField("Invite this bot to other servers!", "```\n !invite```", false);
+			embedBuilder.addField("Add this bot to other servers!", "```\n !invite```", false);
 		} else if (s.equals("!setup")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
 			embedBuilder.setColor(Color.MAGENTA);
