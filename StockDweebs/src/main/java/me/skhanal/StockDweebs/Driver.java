@@ -29,6 +29,9 @@ public class Driver{
 		AlertListener alert = new AlertListener();
 		jdaBuilder.addEventListeners(alert);
 		
+		ChannelListener channel = new ChannelListener();
+		jdaBuilder.addEventListeners(channel);
+		
 		jdaBuilder.setActivity(Activity.watching("StockDweeb's Posts"));
 
 		try {
@@ -36,7 +39,6 @@ public class Driver{
 		} catch (LoginException e) {
 			e.printStackTrace();
 		}
-		
 		
 		try {
 			jda.awaitReady();
