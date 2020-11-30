@@ -15,6 +15,9 @@ import net.dv8tion.jda.api.requests.restaction.WebhookAction;
 public class AlertListener extends ListenerAdapter {
 	
 	private boolean ALERTS_ON = false;
+	private WebhookAction webhookBuilder = null;
+	private File myFile = new File("C:\\Users\\subod\\Downloads\\icon.jpg");
+	private TextChannel webhookChannel;
 		
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
@@ -27,13 +30,18 @@ public class AlertListener extends ListenerAdapter {
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and posts on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
 		} else if ((e.getMessage().getContentRaw().matches("!alerts on|!alerts off")) && (!(e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)))) {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + ChannelListener.CHANNEL_INPUT + " channel. Please use this command in that channel").queue();
-		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
+		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)) && (ALERTS_ON == true)) {
+			e.getChannel().sendMessage("Alerts are already on for the channel: " + ChannelListener.CHANNEL_INPUT + ".").queue();
+		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)) && (ALERTS_ON == false)) {
 			ALERTS_ON = true;
 			e.getChannel().sendMessage(alertEmbed(e)).queue();
+			webhookChannel = e.getMessage().getTextChannel();
 			twitterWebhook(e).queue();
+			youtubeWebhook(e).queue();
 		} else if (e.getMessage().getContentRaw().equals("!alerts off") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			ALERTS_ON = false;
 			e.getChannel().sendMessage(alertEmbed(e)).queue();
+			deleteWebhook(e);
 		}
 	}
 	
@@ -55,17 +63,25 @@ public class AlertListener extends ListenerAdapter {
 
 	
 	public WebhookAction twitterWebhook(MessageReceivedEvent e) {
-		WebhookAction webhookBuilder = null;
-		File myFile = new File("C:\\Users\\subod\\Downloads\\icon.jpg");
-		TextChannel webhookChannel = e.getMessage().getTextChannel();
-		
 		try {
 			webhookBuilder = webhookChannel.createWebhook("StockDweebs Twitter").setName("StockDweebs Twitter").setAvatar(Icon.from(myFile));
 		} catch (IOException f) {
-			System.out.println("invalid file");
+			System.out.println("Invalid file or nonexistent file.");
 		}
-		
 		return webhookBuilder;
+	}
+	
+	public WebhookAction youtubeWebhook(MessageReceivedEvent e) {
+		try {
+			webhookBuilder = webhookChannel.createWebhook("StockDweebs YouTube").setName("StockDweebs YouTube").setAvatar(Icon.from(myFile));
+		} catch (IOException f) {
+			System.out.println("Invalid file or nonexistent file.");
+		}	
+		return webhookBuilder;
+	}
+	
+	public void deleteWebhook(MessageReceivedEvent e) {
+		webhookChannel.deleteWebhookById("StockDweebs Twitter");
 	}
 
 }
