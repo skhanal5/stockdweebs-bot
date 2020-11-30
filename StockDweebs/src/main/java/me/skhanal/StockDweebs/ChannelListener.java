@@ -1,7 +1,6 @@
 package me.skhanal.StockDweebs;
 
 import java.util.List;
-
 import net.dv8tion.jda.api.entities.GuildChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -11,6 +10,7 @@ public class ChannelListener extends ListenerAdapter {
 	List<GuildChannel> CHANNEL_LIST;
 	public static String CHANNEL_INPUT;
 	public static String CHANNEL_ID;
+	public static GuildChannel CURR_CHANNEL;
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
@@ -24,6 +24,7 @@ public class ChannelListener extends ListenerAdapter {
 			for(GuildChannel channel: CHANNEL_LIST) {
 				if (channel.getName().equals(CHANNEL_INPUT)) {
 					CHANNEL_ID = channel.getId();
+					CURR_CHANNEL = channel;
 				}
 			}
 			

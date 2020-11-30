@@ -9,9 +9,11 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class BotConfiguration extends ListenerAdapter {
 	
+	public static Guild currGuild;
+	
 	@Override
 	public void onGuildJoin(GuildJoinEvent e) {
-		Guild currGuild = e.getGuild();
+		currGuild = e.getGuild();
 		currGuild.getDefaultChannel().sendMessage(setupEmbed(e)).queue();
 	}
 

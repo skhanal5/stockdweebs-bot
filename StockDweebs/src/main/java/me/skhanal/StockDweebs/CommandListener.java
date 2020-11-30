@@ -1,7 +1,6 @@
 package me.skhanal.StockDweebs;
 
 import java.awt.Color;
-import me.skhanal.StockDweebs.ChannelListener;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

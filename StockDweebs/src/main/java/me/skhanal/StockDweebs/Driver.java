@@ -17,6 +17,7 @@ public class Driver{
 		gatewayIntents.add(GatewayIntent.GUILD_MEMBERS);
 		
 		JDABuilder jdaBuilder = JDABuilder.createDefault(Constants.BOT_TOKEN);
+		
 		jdaBuilder.enableIntents(gatewayIntents);
 		JDA jda = null;
 		
