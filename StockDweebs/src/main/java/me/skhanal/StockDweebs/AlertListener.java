@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.managers.WebhookManager;
 import net.dv8tion.jda.api.requests.restaction.WebhookAction;
 
 public class AlertListener extends ListenerAdapter {
@@ -41,7 +42,6 @@ public class AlertListener extends ListenerAdapter {
 		} else if (e.getMessage().getContentRaw().equals("!alerts off") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			ALERTS_ON = false;
 			e.getChannel().sendMessage(alertEmbed(e)).queue();
-			deleteWebhook(e);
 		}
 	}
 	
@@ -78,10 +78,6 @@ public class AlertListener extends ListenerAdapter {
 			System.out.println("Invalid file or nonexistent file.");
 		}	
 		return webhookBuilder;
-	}
-	
-	public void deleteWebhook(MessageReceivedEvent e) {
-		webhookChannel.deleteWebhookById("StockDweebs Twitter");
 	}
 
 }
