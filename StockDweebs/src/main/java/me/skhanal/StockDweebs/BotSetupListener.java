@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class BotConfiguration extends ListenerAdapter {
+public class BotSetupListener extends ListenerAdapter {
 	
 	public static Guild currGuild;
 	
