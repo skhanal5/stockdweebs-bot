@@ -19,7 +19,7 @@ public class BotSetupListener extends ListenerAdapter {
 
 	public MessageEmbed setupEmbed(GuildJoinEvent e) {
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setAuthor("StockDweebs Bot", null, "https://images-ext-1.discordapp.net/external/PKfK4q2WAmoeELjQAuZCAdR8hIVfkbpyIpAc1fYLQY8/https/yt3.ggpht.com/ytc/AAUvwnjZewrii9lxuZap3nfEGk69IiqDHGcOA7UgpVl_hg%3Ds900-c-k-c0x00ffffff-no-rj?width=677&height=677");
+		embed.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 		embed.setColor(Color.MAGENTA);
 		embed.setDescription("Thank you for adding the StockDweebs Bot to " + e.getGuild().getName() + ". \n To improve your experience with our services please configure this bot with the following settings. \n \n If you have any questions or suggestions in regards to improving this bot, please contact [us](https://github.com/skhanal5/stockdweebs-bot/issues).");
 		embed.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
