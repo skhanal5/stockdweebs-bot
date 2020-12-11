@@ -1,30 +1,27 @@
 package me.skhanal.StockDweebs;
 
 import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Icon;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.requests.restaction.WebhookAction;
 
 public class AlertListener extends ListenerAdapter {
 	
 	private boolean ALERTS_ON = false;
-	private WebhookAction webhookBuilder = null;
-	private File myFile = new File("C:\\Users\\subod\\Downloads\\icon.jpg");
-	private TextChannel webhookChannel;
-		
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
+		
+		String user = e.getAuthor().getName();
+		boolean checkPerms = e.getMember().hasPermission(Permission.ADMINISTRATOR);
 		
 		if (e.getMessage().getContentRaw().equals("!alerts")) {
 			e.getChannel().sendMessage("Invalid command. To use this command type !alerts and either \"on\" or \"off\" (without quotes) following that statement with a space. If you need additional assistance, refer to !setup for help").queue();
 		} else if (e.getMessage().getContentRaw().startsWith("!alerts") && ((!(e.getMessage().getContentRaw().endsWith(" on"))) && (!(e.getMessage().getContentRaw().endsWith(" off"))))){
 			e.getChannel().sendMessage("Invalid command. To use this command type !alerts and either \"on\" or \"off\" (without quotes) following that statement with a space. If you need additional assistance, refer to !setup for help").queue();
+		} else if ((e.getMessage().getContentRaw().matches("!alerts on|!alerts off")) && (!checkPerms)) {
+			e.getChannel().sendMessage("User: " + user + " does not have valid permissions to use this command.").queue();
 		} else if ((e.getMessage().getContentRaw().matches("!alerts on|!alerts off")) && (ChannelListener.CHANNEL_ID==null)) {
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and posts on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
 		} else if ((e.getMessage().getContentRaw().matches("!alerts on|!alerts off")) && (!(e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)))) {
@@ -34,9 +31,6 @@ public class AlertListener extends ListenerAdapter {
 		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)) && (ALERTS_ON == false)) {
 			ALERTS_ON = true;
 			e.getChannel().sendMessage(alertEmbed(e)).queue();
-			webhookChannel = e.getMessage().getTextChannel();
-			twitterWebhook(e).queue();
-			youtubeWebhook(e).queue();
 		} else if (e.getMessage().getContentRaw().equals("!alerts off") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
 			ALERTS_ON = false;
 			e.getChannel().sendMessage(alertEmbed(e)).queue();
@@ -58,24 +52,4 @@ public class AlertListener extends ListenerAdapter {
 		}
 		return embedBuilder.build();
 	}
-
-	
-	public WebhookAction twitterWebhook(MessageReceivedEvent e) {
-		try {
-			webhookBuilder = webhookChannel.createWebhook("StockDweebs Twitter").setName("StockDweebs Twitter").setAvatar(Icon.from(myFile));
-		} catch (IOException f) {
-			System.out.println("Invalid file or nonexistent file.");
-		}
-		return webhookBuilder;
-	}
-	
-	public WebhookAction youtubeWebhook(MessageReceivedEvent e) {
-		try {
-			webhookBuilder = webhookChannel.createWebhook("StockDweebs YouTube").setName("StockDweebs YouTube").setAvatar(Icon.from(myFile));
-		} catch (IOException f) {
-			System.out.println("Invalid file or nonexistent file.");
-		}	
-		return webhookBuilder;
-	}
-
 }
