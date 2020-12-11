@@ -67,7 +67,7 @@ public class CommandListener extends ListenerAdapter {
 		} else if (input.equals("!commands")){
 			embedBuilder.setAuthor("StockDweebs Command List", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO);
-			embedBuilder.setColor(Color.MAGENTA);
+			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.addField("Weekly Watchlist", "```\n !watchlist```", false);
 			embedBuilder.addField("Weekly Stockpicks", "```\n !stockpicks```", false);
 			embedBuilder.addField("Premium Membership", "```\n !premium```", false);
@@ -77,19 +77,19 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.addField("Add this bot to other servers!", "```\n !invite```", false);
 		} else if (input.equals("!setup")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
-			embedBuilder.setColor(Color.MAGENTA);
+			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setDescription("To improve your experience with our services please configure this bot with the following settings. \n \n If you have any questions or suggestions in regards to improving this bot, please contact [us](https://github.com/skhanal5/stockdweebs-bot/issues).");
 			embedBuilder.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
 			embedBuilder.addField("!alerts [on/off]", "```\n Turn on post notifications from the StockDweebs twitter and  youtube page. ```", false);
 			embedBuilder.addField("!commands", "```\n Type this to view a full list of commands. ```", false);
 		} else if (input.equals("!invite")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
-			embedBuilder.setColor(Color.MAGENTA);
+			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setTitle("Add this bot to your other servers!", Constants.INVITE_LINK);
 		} else if (input.equals("!premium")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
-			embedBuilder.setColor(Color.MAGENTA);
+			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setDescription("Premium subscription service will be coming soon. Stay tuned for updates on my [social media](https://twitter.com/StockDweebs)!");
 		}
 		return embedBuilder.build();
