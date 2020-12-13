@@ -20,7 +20,6 @@ public class ChannelListener extends ListenerAdapter {
 		String user = e.getAuthor().getName();
 		boolean checkPerms = e.getMember().hasPermission(Permission.ADMINISTRATOR);
 		
-	
 		if (e.getMessage().getContentRaw().equals("!setchannel")) {
 			e.getChannel().sendMessage("Invalid command or channel name. To use this command type !setchannel and the channel name following that statement with a space. If you need additional assistance, refer to !setup for help.").queue();
 		} else if(e.getMessage().getContentRaw().startsWith("!setchannel") && checkPerms) {

@@ -62,7 +62,7 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setAuthor("Twitter", null , Constants.TWITTER_LOGO);
 			embedBuilder.setDescription("Ten weekly stock picks posted here every Sunday @ 9AM EST (pinned tweet).");
 			embedBuilder.setTitle("StockDweebs Twitter", "https://twitter.com/StockDweebs");
-			embedBuilder.setColor(Color.CYAN);
+			embedBuilder.setColor(new Color (29,161,242));
 			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO);
 		} else if (input.equals("!commands")){
 			embedBuilder.setAuthor("StockDweebs Command List", null, Constants.STOCKDWEEBS_LOGO);
