@@ -18,12 +18,6 @@ public class MongoDB {
 		mongoClient = MongoClients.create(Constants.CLIENT_URL);
 		database = mongoClient.getDatabase("StockDweebs");
 		guildCollection = database.getCollection("GuildInfo");
-		
-		Document docTest = new Document("yo", "yo");
-		docTest.append("Sex", "male");
-		
-		guildCollection.insertOne(docTest);
-		
 	}
 	
 }
