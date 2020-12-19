@@ -15,6 +15,7 @@ public class SetupListener extends ListenerAdapter {
 		currGuild = e.getGuild();
 		currGuild.getDefaultChannel().sendMessage(setupEmbed(e)).queue();
 	}
+	
 
 	public MessageEmbed setupEmbed(GuildJoinEvent e) {
 		EmbedBuilder embed = new EmbedBuilder();
