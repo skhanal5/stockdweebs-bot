@@ -23,6 +23,7 @@ public class MongoDB {
 		guildInfo = database.getCollection("GuildInfo");
 	}
 
+	//adds this guild to the database
 	public void add(String guildName, String guildId) {
 		Document guildDoc = new Document();
 		guildDoc.append("guild-name", guildName).append("guild-id", guildId);
@@ -34,6 +35,7 @@ public class MongoDB {
 		guildInfo.deleteMany(Filters.in("guild-id", List.of(guildId)));
 	}
 	
+	//retrieves the default channel alerts are being posted on
 	public String getChannel(String guildId) {
 		String currChannel = "";
 		FindIterable<Document> search = guildInfo.find(Filters.in("guild-id", guildId));
@@ -43,14 +45,9 @@ public class MongoDB {
 		return currChannel;
 	}
 
-	//add's default channel name into the database
+	//sets default channel name into the database
 	public void setChannel(String guildId, String channelName) {
 		guildInfo.updateOne(Filters.in("guild-id", guildId), Updates.set("default-channel-name", channelName));
-	}
-
-	public static void main(String[] args) {
-		//MongoDB db = new MongoDB();
-		//System.out.println("HELLO" + db.getChannel("775162291728678953"));
 	}
 
 }
