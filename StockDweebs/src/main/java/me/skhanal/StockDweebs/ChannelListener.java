@@ -27,8 +27,9 @@ public class ChannelListener extends ListenerAdapter {
 			CHANNEL_LIST = e.getGuild().getChannels();
 			for(GuildChannel channel: CHANNEL_LIST) {
 				if (channel.getName().equals(CHANNEL_INPUT)) {
-					CHANNEL_ID = channel.getId();
 					CURR_CHANNEL = channel;
+					CHANNEL_ID = channel.getId();
+					SetupListener.database.setChannel(e.getGuild().getId(), CHANNEL_INPUT);
 				}
 			}
 			

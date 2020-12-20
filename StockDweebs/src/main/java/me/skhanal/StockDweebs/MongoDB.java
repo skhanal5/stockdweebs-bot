@@ -1,7 +1,9 @@
 package me.skhanal.StockDweebs;
 
+
 import java.util.List;
 import org.bson.Document;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -11,9 +13,9 @@ import com.mongodb.client.model.Updates;
 
 public class MongoDB {
 
-	private MongoClient mongoClient;
-	private MongoDatabase database;
-	private MongoCollection<Document> guildInfo;
+	private static MongoClient mongoClient;
+	private static MongoDatabase database;
+	private static MongoCollection<Document> guildInfo;
 
 	public MongoDB() {
 		mongoClient = MongoClients.create(Constants.CLIENT_URL);
@@ -31,18 +33,24 @@ public class MongoDB {
 	public void remove(String guildId) {
 		guildInfo.deleteMany(Filters.in("guild-id", List.of(guildId)));
 	}
+	
+	public String getChannel(String guildId) {
+		String currChannel = "";
+		FindIterable<Document> search = guildInfo.find(Filters.in("guild-id", guildId));
+		for (Document d: search) {
+			currChannel = (String)d.get("default-channel-name");
+		}
+		return currChannel;
+	}
 
-	//update's document in database when !setchannel is initialized/updated?
-	public void update(String guildId, String channelId) {
-		guildInfo.updateOne(Filters.in("guild-id", guildId), Updates.set("default-channel", channelId));
+	//add's default channel name into the database
+	public void setChannel(String guildId, String channelName) {
+		guildInfo.updateOne(Filters.in("guild-id", guildId), Updates.set("default-channel-name", channelName));
 	}
 
 	public static void main(String[] args) {
-		MongoDB db = new MongoDB();
-		//db.add("Hector's Traphouse", "12314241421");
-		//db.add("bot-test-1", "21313413413");
-		//db.update("12314241421", "Stock-Dweebs");
-		db.remove("12314241421");
+		//MongoDB db = new MongoDB();
+		//System.out.println("HELLO" + db.getChannel("775162291728678953"));
 	}
 
 }

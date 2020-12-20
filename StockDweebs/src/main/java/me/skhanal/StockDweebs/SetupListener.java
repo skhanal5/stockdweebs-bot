@@ -9,9 +9,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class SetupListener extends ListenerAdapter {
 	
 	public static Guild currGuild;
+	public static MongoDB database = new MongoDB();
 	
 	@Override
 	public void onGuildJoin(GuildJoinEvent e) {
+		database.add(e.getGuild().getName(), e.getGuild().getId());
+		database.setChannel(e.getGuild().getId(), "null");
 		currGuild = e.getGuild();
 		currGuild.getDefaultChannel().sendMessage(setupEmbed(e)).queue();
 	}

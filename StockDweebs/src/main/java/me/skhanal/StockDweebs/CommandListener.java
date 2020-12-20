@@ -1,6 +1,7 @@
 package me.skhanal.StockDweebs;
 
 import java.awt.Color;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -10,21 +11,26 @@ public class CommandListener extends ListenerAdapter {
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
-		if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (ChannelListener.CHANNEL_ID==null)){
+		
+		String guildId = e.getGuild().getId();
+		String textID = e.getTextChannel().getName();
+		String definedChannel = SetupListener.database.getChannel(guildId);
+		
+		if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (definedChannel.equals("null"))){
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
-		} else if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (!(e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID)))) {
-			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + ChannelListener.CHANNEL_INPUT + " channel. Please use this command in that channel").queue();
-		} else if (e.getMessage().getContentRaw().equals("!watchlist") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
+		} else if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (!(definedChannel.equals(textID)))) {
+			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + definedChannel + " channel. Please use this command in that channel").queue();
+		} else if (e.getMessage().getContentRaw().equals("!watchlist")) {
 			e.getChannel().sendMessage("This week's watchlist: ").queue();
-		} else if (e.getMessage().getContentRaw().equals("!stockpicks") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
+		} else if (e.getMessage().getContentRaw().equals("!stockpicks")) {
 			e.getChannel().sendMessage("This week's stockpicks: ").queue();
-		} else if (e.getMessage().getContentRaw().equals("!invite") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
+		} else if (e.getMessage().getContentRaw().equals("!invite")) {
 			e.getChannel().sendMessage(createEmbed("!invite")).queue();
-		} else if (e.getMessage().getContentRaw().equals("!youtube") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
+		} else if (e.getMessage().getContentRaw().equals("!youtube")) {
 			e.getChannel().sendMessage(createEmbed("!youtube")).queue();
-		} else if (e.getMessage().getContentRaw().equals("!twitter") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
+		} else if (e.getMessage().getContentRaw().equals("!twitter")) {
 			e.getChannel().sendMessage(createEmbed("!twitter")).queue();
-		} else if(e.getMessage().getContentRaw().equals("!premium") && (e.getTextChannel().getId().equals(ChannelListener.CHANNEL_ID))) {
+		} else if(e.getMessage().getContentRaw().equals("!premium")) {
 			e.getChannel().sendMessage(createEmbed("!premium")).queue();
 		} else if(e.getMessage().getContentRaw().equals("!commands")) {
 			e.getChannel().sendMessage(createEmbed("!commands")).queue();
