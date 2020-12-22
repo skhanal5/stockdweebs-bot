@@ -20,7 +20,7 @@ public class SetupListener extends ListenerAdapter {
 	}
 	
 
-	public MessageEmbed setupEmbed(GuildJoinEvent e) {
+	private MessageEmbed setupEmbed(GuildJoinEvent e) {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 		embed.setColor(Constants.BRAND_COLOR);

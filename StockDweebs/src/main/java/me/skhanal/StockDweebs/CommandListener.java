@@ -13,12 +13,12 @@ public class CommandListener extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent e) {
 		
 		String guildId = e.getGuild().getId();
-		String textID = e.getTextChannel().getName();
+		String currChannel = e.getTextChannel().getName();
 		String definedChannel = SetupListener.database.getChannel(guildId);
 		
 		if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (definedChannel.equals("null"))){
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
-		} else if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (!(definedChannel.equals(textID)))) {
+		} else if (e.getMessage().getContentRaw().matches("!watchlist|!stockpicks|!invite|!youtube|!twitter|!premium") && (!(definedChannel.equals(currChannel)))) {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + definedChannel + " channel. Please use this command in that channel").queue();
 		} else if (e.getMessage().getContentRaw().equals("!watchlist")) {
 			e.getChannel().sendMessage("This week's watchlist: ").queue();
@@ -39,7 +39,7 @@ public class CommandListener extends ListenerAdapter {
 		}
 	}
 
-	public MessageEmbed createEmbed(String input) {
+	private MessageEmbed createEmbed(String input) {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		
 		if (input.equals("!youtube")) {
