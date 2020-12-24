@@ -2,13 +2,22 @@ package me.skhanal.StockDweebs;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import twitter4j.FilterQuery;
+import twitter4j.StallWarning;
+import twitter4j.Status;
+import twitter4j.StatusDeletionNotice;
+import twitter4j.StatusListener;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
+import twitter4j.auth.AccessToken;
 
 public class AlertListener extends ListenerAdapter {
 	
-	private boolean ALERTS_ON = false;
+	private static boolean ALERTS_ON = false;
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
@@ -34,13 +43,14 @@ public class AlertListener extends ListenerAdapter {
 		} else if (e.getMessage().getContentRaw().equals("!alerts on")) {
 			ALERTS_ON = true;
 			e.getChannel().sendMessage(alertEmbed(e)).queue();
+			TweetStream(e.getChannel());
 		} else if (e.getMessage().getContentRaw().equals("!alerts off") && ALERTS_ON==true) {
 			ALERTS_ON = false;
 			e.getChannel().sendMessage(alertEmbed(e)).queue();
 		}
 	}
 	
-	private MessageEmbed alertEmbed (MessageReceivedEvent e) {
+	private static MessageEmbed alertEmbed (MessageReceivedEvent e) {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		if(ALERTS_ON == true) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
@@ -54,5 +64,47 @@ public class AlertListener extends ListenerAdapter {
 			embedBuilder.setDescription("Twitter and Youtube post notifications will be OFF for the following channel: " + e.getChannel().getName());
 		}
 		return embedBuilder.build();
+	}
+	
+	private static void TweetStream(MessageChannel currChannel) {
+		
+		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
+		twitterStream.setOAuthConsumer(Constants.CONSUMER_KEY, Constants.CONSUMER_SECRET);
+		twitterStream.setOAuthAccessToken(new AccessToken(Constants.ACCESS_KEY, Constants.ACCESS_SECRET));
+		
+		StatusListener listener = new StatusListener() {
+			
+			public void onStatus(Status status) {
+                String url = "http://twitter.com" + status.getUser().getScreenName() + "/status/" + status.getId();
+                currChannel.sendMessage(url).queue();;
+            }
+			
+			public void onException(Exception e) {
+				e.printStackTrace();
+			}
+
+            public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+                System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
+            }
+
+
+            public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
+                System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
+            }
+
+
+            public void onScrubGeo(long userId, long upToStatusId) {
+                System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
+            }
+
+            public void onStallWarning(StallWarning warning) {
+                System.out.println("Got stall warning:" + warning);
+            }
+		};
+		
+		twitterStream.addListener(listener);
+		FilterQuery query = new FilterQuery();
+		query.follow(Constants.TWITTER_ID);
+		twitterStream.filter(query);
 	}
 }

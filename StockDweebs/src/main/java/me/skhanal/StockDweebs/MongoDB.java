@@ -1,6 +1,5 @@
 package me.skhanal.StockDweebs;
 
-
 import java.util.List;
 import org.bson.Document;
 import com.mongodb.client.FindIterable;
@@ -19,8 +18,8 @@ public class MongoDB {
 
 	public MongoDB() {
 		mongoClient = MongoClients.create(Constants.CLIENT_URL);
-		database = mongoClient.getDatabase("StockDweebs");
-		guildInfo = database.getCollection("GuildInfo");
+		database = mongoClient.getDatabase(Constants.DATABASE_NAME);
+		guildInfo = database.getCollection(Constants.COLLECTION_NAME);
 	}
 
 	//adds this guild to the database
@@ -49,5 +48,4 @@ public class MongoDB {
 	public void setChannel(String guildId, String channelName) {
 		guildInfo.updateOne(Filters.in("guild-id", guildId), Updates.set("default-channel-name", channelName));
 	}
-
 }
