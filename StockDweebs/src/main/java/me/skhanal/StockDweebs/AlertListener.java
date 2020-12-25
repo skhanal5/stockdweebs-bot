@@ -15,7 +15,7 @@ import twitter4j.StatusListener;
 public class AlertListener extends ListenerAdapter {
 	
 	@Override
-	public void onMessageReceived(MessageReceivedEvent e) {	
+	public void onMessageReceived(MessageReceivedEvent e) { 	
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
 		String definedChannel = SetupListener.database.getChannel(guildId);
@@ -60,7 +60,7 @@ public class AlertListener extends ListenerAdapter {
 		return embedBuilder.build();
 	}
 	
-	public void startStream(MessageChannel currChannel, String guildId) {
+	private void startStream(MessageChannel currChannel, String guildId) {
 		
 		StatusListener listener = new StatusListener() {
 			

@@ -15,7 +15,7 @@ public class BotInitializer {
 	
 	public static TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
 	GatewayIntent[] gatewayIntents = new GatewayIntent[] {GatewayIntent.GUILD_MEMBERS};
-	ListenerAdapter[] listenerAdapter = new ListenerAdapter[] {new CommandListener(), new AlertListener(), new SetupListener(), new ChannelListener()};
+	ListenerAdapter[] listenerAdapter = new ListenerAdapter[] {new CommandListener(), new AlertListener(), new SetupListener(), new ChannelListener(), new PicksListener()};
 		
 	public void start() throws LoginException, InterruptedException{
 		JDABuilder jdaBuilder = JDABuilder.createDefault(Constants.BOT_TOKEN);
