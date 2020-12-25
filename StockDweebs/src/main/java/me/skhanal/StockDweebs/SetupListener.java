@@ -15,6 +15,7 @@ public class SetupListener extends ListenerAdapter {
 	public void onGuildJoin(GuildJoinEvent e) {
 		database.add(e.getGuild().getName(), e.getGuild().getId());
 		database.setChannel(e.getGuild().getId(), "null");
+		database.setAlerts(e.getGuild().getId(), "off");
 		currGuild = e.getGuild();
 		currGuild.getDefaultChannel().sendMessage(setupEmbed(e)).queue();
 	}

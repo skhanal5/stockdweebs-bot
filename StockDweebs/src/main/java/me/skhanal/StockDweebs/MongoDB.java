@@ -33,6 +33,11 @@ public class MongoDB {
 	public void remove(String guildId) {
 		guildInfo.deleteMany(Filters.in("guild-id", List.of(guildId)));
 	}
+
+	//sets default channel name into the database
+	public void setChannel(String guildId, String channelName) {
+		guildInfo.updateOne(Filters.in("guild-id", guildId), Updates.set("default-channel-name", channelName));
+	}
 	
 	//retrieves the default channel alerts are being posted on
 	public String getChannel(String guildId) {
@@ -43,9 +48,20 @@ public class MongoDB {
 		}
 		return currChannel;
 	}
-
-	//sets default channel name into the database
-	public void setChannel(String guildId, String channelName) {
-		guildInfo.updateOne(Filters.in("guild-id", guildId), Updates.set("default-channel-name", channelName));
+	
+	//sets alerts to either on or off
+	public void setAlerts(String guildId, String channelName) {
+		guildInfo.updateOne(Filters.in("guild-id", guildId), Updates.set("alerts-setting", channelName));
 	}
+	
+	//retrieves whether alerts are on or off
+	public String getAlerts(String guildId) {
+		String currAlerts = "";
+		FindIterable<Document> search = guildInfo.find(Filters.in("guild-id", guildId));
+		for (Document d: search) {
+			currAlerts = (String)d.get("alerts-setting");
+		}
+		return currAlerts;
+	}
+	
 }

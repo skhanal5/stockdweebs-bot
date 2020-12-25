@@ -11,17 +11,11 @@ import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
-import twitter4j.TwitterStream;
-import twitter4j.TwitterStreamFactory;
-import twitter4j.auth.AccessToken;
 
 public class AlertListener extends ListenerAdapter {
 	
-	private static boolean ALERTS_ON = false;
-	
 	@Override
-	public void onMessageReceived(MessageReceivedEvent e) {
-		
+	public void onMessageReceived(MessageReceivedEvent e) {	
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
 		String definedChannel = SetupListener.database.getChannel(guildId);
@@ -38,26 +32,26 @@ public class AlertListener extends ListenerAdapter {
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and posts on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
 		} else if ((e.getMessage().getContentRaw().matches("!alerts on|!alerts off")) && (!(definedChannel.equals(currChannel)))) {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + definedChannel + " channel. Please use this command in that channel").queue();
-		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (definedChannel.equals(currChannel) && (ALERTS_ON == true))) {
+		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (definedChannel.equals(currChannel) && (SetupListener.database.getAlerts(guildId).equals("on")))) {
 			e.getChannel().sendMessage("Alerts are already on for the channel: " + definedChannel + ".").queue();
 		} else if (e.getMessage().getContentRaw().equals("!alerts on")) {
-			ALERTS_ON = true;
-			e.getChannel().sendMessage(alertEmbed(e)).queue();
-			TweetStream(e.getChannel());
-		} else if (e.getMessage().getContentRaw().equals("!alerts off") && ALERTS_ON==true) {
-			ALERTS_ON = false;
-			e.getChannel().sendMessage(alertEmbed(e)).queue();
+			SetupListener.database.setAlerts(guildId, "on");
+			e.getChannel().sendMessage(alertEmbed(e, true)).queue();
+			startStream(e.getChannel(), guildId);
+		} else if (e.getMessage().getContentRaw().equals("!alerts off") && (SetupListener.database.getAlerts(guildId).equals("on"))) {
+			SetupListener.database.setAlerts(guildId, "off");
+			e.getChannel().sendMessage(alertEmbed(e, false)).queue();
 		}
 	}
 	
-	private static MessageEmbed alertEmbed (MessageReceivedEvent e) {
+	private static MessageEmbed alertEmbed (MessageReceivedEvent e, boolean checkAlerts) {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
-		if(ALERTS_ON == true) {
+		if(checkAlerts == true) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setDescription("Twitter and Youtube post notifications will be ON for the following channel: " + e.getChannel().getName());
-		} else if (ALERTS_ON == false){
+		} else if (checkAlerts == false){
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO);
@@ -66,17 +60,15 @@ public class AlertListener extends ListenerAdapter {
 		return embedBuilder.build();
 	}
 	
-	private static void TweetStream(MessageChannel currChannel) {
-		
-		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
-		twitterStream.setOAuthConsumer(Constants.CONSUMER_KEY, Constants.CONSUMER_SECRET);
-		twitterStream.setOAuthAccessToken(new AccessToken(Constants.ACCESS_KEY, Constants.ACCESS_SECRET));
+	public void startStream(MessageChannel currChannel, String guildId) {
 		
 		StatusListener listener = new StatusListener() {
 			
 			public void onStatus(Status status) {
-                String url = "http://twitter.com" + status.getUser().getScreenName() + "/status/" + status.getId();
-                currChannel.sendMessage(url).queue();;
+                String url = "http://twitter.com/" + status.getUser().getScreenName() + "/status/" + status.getId();
+                if (SetupListener.database.getAlerts(guildId).equals("on")) {
+                	 currChannel.sendMessage(url).queue();
+                }
             }
 			
 			public void onException(Exception e) {
@@ -101,10 +93,9 @@ public class AlertListener extends ListenerAdapter {
                 System.out.println("Got stall warning:" + warning);
             }
 		};
-		
-		twitterStream.addListener(listener);
+		BotInitializer.twitterStream.addListener(listener);
 		FilterQuery query = new FilterQuery();
 		query.follow(Constants.TWITTER_ID);
-		twitterStream.filter(query);
+		BotInitializer.twitterStream.filter(query);
 	}
 }
