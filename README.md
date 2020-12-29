@@ -14,7 +14,7 @@ I am not associated with or sponsored by the StockDweebs brand in any way, shape
 
 ## Setting up the bot in Discord
 
-In order to add this discord bot to your discord server, use this [invite link](https://discord.com/oauth2/authorize?client_id=780691100964356146&permissions=8&scope=bot). Once it joins the server, the bot should prompt the user with this message:
+In order to add this discord bot to your discord server, use this [invite link]. Once it joins the server, the bot should prompt the user with this message:
 
 ![image](https://user-images.githubusercontent.com/74752121/103312354-c1f27780-49ea-11eb-8969-3aca8a4008b6.png)
 
