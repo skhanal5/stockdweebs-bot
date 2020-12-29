@@ -1,5 +1,11 @@
 # stockdweebs-bot
 
+![language](https://img.shields.io/github/languages/top/skhanal5/stockdweebs-bot)
+![license](https://img.shields.io/github/license/skhanal5/stockdweebs-bot)
+![commit](https://img.shields.io/github/last-commit/skhanal5/stockdweebs-bot)
+![issues](https://img.shields.io/github/issues/skhanal5/stockdweebs-bot)
+![stars](https://img.shields.io/github/stars/skhanal5/stockdweebs-bot?style=social)
+
 A simple and convenient Discord bot made with JDA, Twitter4J, and MongoDB to alert and notify users for any activity associated with the official StockDweebs account.
 
 ## Disclaimer
@@ -25,7 +31,11 @@ These commands are all text-based and can be inputted in a text channel in a dis
 
 **Warning:** Any commands marked with an asterisk (*) are restricted for Discord users that have the "administrator" permission. Those features are mainly for configuring the bot and should not be allowed for widespread use in a server from others outside the server admin.
 
-## Built-With
+## Bug Reports / Feature Requests
+
+If you encounter any problems with the Discord bot, please make an issue with an appropriate title, label, and a detailed response [here](https://github.com/skhanal5/stockdweebs-bot/issues). Similarly, if you have any requests for additional features to be added onto this bot, please submit an issue with the label "feature-request" [here](https://github.com/skhanal5/stockdweebs-bot/issues) describing the feature you would like added. I will do my best to look over these reports and requests in my spare time.
+
+## Built With
 * [JDA](https://github.com/DV8FromTheWorld/JDA) - Utilized wrapper to directly have access to Discord API
 * [Twitter4J](http://twitter4j.org/en/) - Used for Twitter integration into the Discord bot
 * [MongoDB](https://www.mongodb.com/) - Used cloud based database to store discord server information
