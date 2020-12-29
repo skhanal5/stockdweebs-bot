@@ -12,6 +12,18 @@ A simple and convenient Discord bot made with JDA, Twitter4J, and MongoDB to ale
 
 I am not associated with or sponsored by the StockDweebs brand in any way, shape, or form.
 
+## Setting up the bot in Discord
+
+In order to add this discord bot to your discord server, use this [invite link](https://discord.com/oauth2/authorize?client_id=780691100964356146&permissions=8&scope=bot). Once it joins the server, the bot should prompt the user with this message:
+
+![image](https://user-images.githubusercontent.com/74752121/103312354-c1f27780-49ea-11eb-8969-3aca8a4008b6.png)
+
+From there, you need to designate a text channel for the bot to post alerts and messages on by typing the command !setchannel [server name] into any text channel like so:
+
+[![Image from Gyazo](https://i.gyazo.com/c1ec78c9bc933e3c87da5622576339c0.gif)](https://gyazo.com/c1ec78c9bc933e3c87da5622576339c0)
+
+As shown, the bot will respond immediately with a message saying that it will only post messages on the channel you specified. From there, you can use the rest of the commands listed below.
+
 ## Command-list/Features
 
 This bot currently supports the commands listed below:
@@ -27,7 +39,7 @@ This bot currently supports the commands listed below:
 * !setchannel* (channel name) -restricts this bot to one text channel in order to reduce spam
 * !alerts* (on/off) - posts a real-time stream of twitter posts from the StockDweebs twitter (may be slightly delayed depending on traffic)
 
-These commands are all text-based and can be inputted in a text channel in a discord server after, the bot has been configured with the proper settings. The bot will respond in the designated text-channel as specified by the server admin.
+These commands are all text-based and can be inputted in a text channel in a discord server once the bot has been configured with the proper settings. The bot will respond in the designated text-channel as specified by the server admin.
 
 **Warning:** Any commands marked with an asterisk (*) are restricted for Discord users that have the "administrator" permission. Those features are mainly for configuring the bot and should not be allowed for widespread use in a server from others outside the server admin.
 
