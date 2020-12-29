@@ -12,7 +12,7 @@ A simple and convenient Discord bot made with JDA, Twitter4J, and MongoDB to ale
 
 I am not associated with or sponsored by the StockDweebs brand in any way, shape, or form.
 
-## Setting up the bot in Discord
+## Setting up the Bot in Discord
 
 In order to add this discord bot to your discord server, use this [invite link]. Once it joins the server, the bot should prompt the user with this message:
 
@@ -31,6 +31,7 @@ This bot currently supports the commands listed below:
 * !setup - contains information to see how the bot should be configured
 * !twitter - posts a link to the StockDweebs twitter account
 * !youtube - posts a link to the StockDweebs youtube channel
+* !help - posts clarification on how to use the bot
 * !stockpicks - posts a link to the dropbox page containing this week's stockpicks
 * !watchlist - posts a link to the dropbox page containing this week's watchlist
 * !premium - contains information regarding premium services 
@@ -46,6 +47,10 @@ These commands are all text-based and can be inputted in a text channel in a dis
 ## Bug Reports / Feature Requests
 
 If you encounter any problems with the Discord bot, please make an issue with an appropriate title, label, and a detailed response [here](https://github.com/skhanal5/stockdweebs-bot/issues). Similarly, if you have any requests for additional features to be added onto this bot, please submit an issue with the label "feature-request" [here](https://github.com/skhanal5/stockdweebs-bot/issues) describing the feature you would like added. I will do my best to look over these reports and requests in my spare time.
+
+## Editing/Contributing to the Project
+
+I am currently working on adding comments and making the code more comprehensive for all users. In the future, I will add a page to the [wiki](https://github.com/skhanal5/stockdweebs-bot/wiki) that will thoroughly explain how to use this repository as intended.
 
 ## Built With
 * [JDA](https://github.com/DV8FromTheWorld/JDA) - Utilized wrapper to directly have access to Discord API
