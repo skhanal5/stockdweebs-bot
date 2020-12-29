@@ -1,6 +1,7 @@
 package me.skhanal.StockDweebs;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -18,7 +19,7 @@ public class AlertListener extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent e) { 	
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
-		String definedChannel = SetupListener.database.getChannel(guildId);
+		String definedChannel = JoinEventHandler.database.getChannel(guildId);
 		String user = e.getAuthor().getName();
 		boolean checkPerms = e.getMember().hasPermission(Permission.ADMINISTRATOR);
 		
@@ -32,14 +33,13 @@ public class AlertListener extends ListenerAdapter {
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and posts on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
 		} else if ((e.getMessage().getContentRaw().matches("!alerts on|!alerts off")) && (!(definedChannel.equals(currChannel)))) {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + definedChannel + " channel. Please use this command in that channel").queue();
-		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (definedChannel.equals(currChannel) && (SetupListener.database.getAlerts(guildId).equals("on")))) {
+		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (definedChannel.equals(currChannel) && (JoinEventHandler.database.getAlerts(guildId).equals("on")))) {
 			e.getChannel().sendMessage("Alerts are already on for the channel: " + definedChannel + ".").queue();
 		} else if (e.getMessage().getContentRaw().equals("!alerts on")) {
-			SetupListener.database.setAlerts(guildId, "on");
+			JoinEventHandler.database.setAlerts(guildId, "on");
 			e.getChannel().sendMessage(alertEmbed(e, true)).queue();
-			startStream(e.getChannel(), guildId);
-		} else if (e.getMessage().getContentRaw().equals("!alerts off") && (SetupListener.database.getAlerts(guildId).equals("on"))) {
-			SetupListener.database.setAlerts(guildId, "off");
+		} else if (e.getMessage().getContentRaw().equals("!alerts off") && (JoinEventHandler.database.getAlerts(guildId).equals("on"))) {
+			JoinEventHandler.database.setAlerts(guildId, "off");
 			e.getChannel().sendMessage(alertEmbed(e, false)).queue();
 		}
 	}
@@ -60,39 +60,50 @@ public class AlertListener extends ListenerAdapter {
 		return embedBuilder.build();
 	}
 	
-	private void startStream(MessageChannel currChannel, String guildId) {
+	public static void startStream(MessageChannel currChannel, String guildId) {
 		
 		StatusListener listener = new StatusListener() {
 			
+			@Override
 			public void onStatus(Status status) {
+				if (status.getText().contains("View the report")) {
+					int startingIndex = status.getText().indexOf("https://");
+					int endingIndex = startingIndex+23;
+					JoinEventHandler.database.setURL(status.getText().substring(startingIndex, endingIndex));
+					
+				}
                 String url = "http://twitter.com/" + status.getUser().getScreenName() + "/status/" + status.getId();
-                if (SetupListener.database.getAlerts(guildId).equals("on")) {
+                if (JoinEventHandler.database.getAlerts(guildId).equals("on")) {
                 	 currChannel.sendMessage(url).queue();
                 }
             }
 			
+			@Override
 			public void onException(Exception e) {
 				e.printStackTrace();
 			}
 
+			@Override
             public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
                 System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
             }
 
-
+			@Override
             public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
                 System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
             }
 
-
+			@Override
             public void onScrubGeo(long userId, long upToStatusId) {
                 System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
             }
 
+			@Override
             public void onStallWarning(StallWarning warning) {
                 System.out.println("Got stall warning:" + warning);
             }
 		};
+		
 		BotInitializer.twitterStream.addListener(listener);
 		FilterQuery query = new FilterQuery();
 		query.follow(Constants.TWITTER_ID);

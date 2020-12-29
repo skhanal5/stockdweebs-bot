@@ -16,7 +16,8 @@ public class MongoDB {
 	private static MongoDatabase database;
 	private static MongoCollection<Document> guildInfo;
 
-	public MongoDB() {
+	//initializes static fields
+	static {
 		mongoClient = MongoClients.create(Constants.CLIENT_URL);
 		database = mongoClient.getDatabase(Constants.DATABASE_NAME);
 		guildInfo = database.getCollection(Constants.COLLECTION_NAME);
@@ -64,4 +65,18 @@ public class MongoDB {
 		return currAlerts;
 	}
 	
+	//sets this week's dropbox url to the database
+	public void setURL(String DROPBOX_URL) {
+		guildInfo.updateOne(Filters.in("weekly-lists", Constants.LIST_DOC), Updates.set("this-week's-list", DROPBOX_URL));
+	}
+	
+	//retrieves this week's dropbox page for the stockpicks and watchlist from the database
+	public String getURL() {
+		String currURL = "";
+		FindIterable<Document> search = guildInfo.find(Filters.in("weekly-lists", Constants.LIST_DOC));
+		for (Document d: search) {
+			currURL = (String)d.get("this-week's-list");
+		}
+		return currURL;
+	}
 }

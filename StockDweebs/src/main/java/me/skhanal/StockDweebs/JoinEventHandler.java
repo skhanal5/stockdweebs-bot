@@ -1,23 +1,21 @@
 package me.skhanal.StockDweebs;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class SetupListener extends ListenerAdapter {
-	
-	public static Guild currGuild;
+public class JoinEventHandler extends ListenerAdapter {
 	public static MongoDB database = new MongoDB();
 	
 	@Override
 	public void onGuildJoin(GuildJoinEvent e) {
-		database.add(e.getGuild().getName(), e.getGuild().getId());
-		database.setChannel(e.getGuild().getId(), "null");
-		database.setAlerts(e.getGuild().getId(), "off");
-		currGuild = e.getGuild();
-		currGuild.getDefaultChannel().sendMessage(setupEmbed(e)).queue();
+		
+		String guildId = e.getGuild().getId();
+		database.add(e.getGuild().getName(), guildId);
+		database.setChannel(guildId, "null");
+		database.setAlerts(guildId, "off");
+		e.getGuild().getDefaultChannel().sendMessage(setupEmbed(e)).queue();
 	}
 	
 
@@ -27,7 +25,7 @@ public class SetupListener extends ListenerAdapter {
 		embed.setColor(Constants.BRAND_COLOR);
 		embed.setDescription("Thank you for adding the StockDweebs Bot to " + e.getGuild().getName() + ". \n To improve your experience with our services please configure this bot with the following settings. \n \n If you have any questions or suggestions in regards to improving this bot, please contact [us](https://github.com/skhanal5/stockdweebs-bot/issues).");
 		embed.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
-		embed.addField("!alerts [on/off]", "```\n Turn on post notifications from the StockDweebs twitter and  youtube page. ```", false);
+		embed.addField("!alerts [on/off]", "```\n Turn on post notifications from the StockDweebs twitter and youtube page. ```", false);
 		return embed.build();
 	}
 }

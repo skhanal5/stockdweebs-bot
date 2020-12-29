@@ -14,7 +14,7 @@ public class CommandListener extends ListenerAdapter {
 		
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
-		String definedChannel = SetupListener.database.getChannel(guildId);
+		String definedChannel = JoinEventHandler.database.getChannel(guildId);
 		
 		if (e.getMessage().getContentRaw().matches("!invite|!youtube|!twitter|!premium") && (definedChannel.equals("null"))){
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
@@ -30,6 +30,8 @@ public class CommandListener extends ListenerAdapter {
 			e.getChannel().sendMessage(createEmbed("!premium")).queue();
 		} else if(e.getMessage().getContentRaw().equals("!commands")) {
 			e.getChannel().sendMessage(createEmbed("!commands")).queue();
+		} else if (e.getMessage().getContentRaw().equals("!setup")) {
+			e.getChannel().sendMessage(createEmbed("!setup")).queue();
 		}
 	}
 
@@ -71,6 +73,7 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.addField("Weekly Watchlist", "```\n !watchlist```", false);
 			embedBuilder.addField("Weekly Stockpicks", "```\n !stockpicks```", false);
 			embedBuilder.addField("Premium Membership", "```\n !premium```", false);
+			embedBuilder.addField("Set Channel", "```\n !setchannel [channelname]```", false);
 			embedBuilder.addField("Alerts", "```\n !alerts [on/off]```", false);
 			embedBuilder.addField("Twitter", "```\n !twitter```", false);
 			embedBuilder.addField("Youtube", "```\n !youtube```", false);
@@ -84,6 +87,12 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setDescription("Premium subscription service will be coming soon. Stay tuned for updates on my [social media](https://twitter.com/StockDweebs)!");
+		} else if (input.equals("!setup")) {
+			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
+			embedBuilder.setColor(Constants.BRAND_COLOR);
+			embedBuilder.setDescription("To improve your experience with our services please configure this bot with the following settings. \n \n If you have any questions or suggestions in regards to improving this bot, please contact [us](https://github.com/skhanal5/stockdweebs-bot/issues).");
+			embedBuilder.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
+			embedBuilder.addField("!alerts [on/off]", "```\n Turn on post notifications from the StockDweebs twitter and  youtube page. ```", false);
 		}
 		return embedBuilder.build();
 	}
