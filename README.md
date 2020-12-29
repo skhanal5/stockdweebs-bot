@@ -16,7 +16,7 @@ I am not associated with or sponsored by the StockDweebs brand in any way, shape
 
 In order to add this discord bot to your discord server, use this [invite link]. Once it joins the server, the bot should prompt the user with this message:
 
-![image](https://user-images.githubusercontent.com/74752121/103312354-c1f27780-49ea-11eb-8969-3aca8a4008b6.png)
+![image](https://user-images.githubusercontent.com/74752121/103317153-a7bf9600-49f8-11eb-958d-a1107d164c3d.png)
 
 From there, you need to designate a text channel for the bot to post alerts and messages on by typing the command !setchannel [server name] into any text channel like so:
 
