@@ -94,11 +94,23 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setDescription("To improve your experience with our services please configure this bot with the following settings: ");
 			embedBuilder.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
-			embedBuilder.addField("Contact us", "If you have any problems or suggestions regarding this bot, please contact [me](https://github.com/skhanal5/stockdweebs-bot/issues) by making an issue.", false);
+			embedBuilder.addField("Contact me", "If you have any problems or suggestions regarding this bot, please contact [me](https://github.com/skhanal5/stockdweebs-bot/issues) by making an issue.", false);
 		} else if (input.equals("!help")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
-			embedBuilder.setDescription("If you need assistance with using this bot, view this [link](https://github.com/skhanal5/stockdweebs-bot) for a detailed guide on setting up the bot and descriptions for each of the commands featured with this bot.");
+			embedBuilder.setDescription("To use this bot, first the server administrator must use the **!setchannel [channelname]** command to specify a channel that the bot will use to post alerts and messages in. \n"
+					+ "\n From there, you will be able to use the other commands. Here is a description of each command: \n \n");
+			embedBuilder.addField("!setup", "*Shows how to configure the bot in case you need it again.*", false);
+			embedBuilder.addField("!alerts [on/off]", "*Turn on or off Twitter post alerts from the StockDweebs twitter page. This command is restricted to **administrators** only.*", false);
+			embedBuilder.addField("!twitter", "*View the official StockDweebs Twitter page*", false);
+			embedBuilder.addField("!youtube", "*View the official StockDweebs Youtube channel*", false);
+			embedBuilder.addField("!premium", "*Posts information regarding premium subscription*", false);
+			embedBuilder.addField("!watchlist", "*Shows this week's watchlist*", false);
+			embedBuilder.addField("!stockpicks", "*Shows this week's stockpicks*", false);
+			embedBuilder.addField("!invite", "*Posts invite link for this bot*", false);
+			embedBuilder.addField("!commands", "*Posts full command list*", false);
+			embedBuilder.addBlankField(true);
+			embedBuilder.addField("Contact me", "If you have any problems or suggestions regarding this bot, please contact [me](https://github.com/skhanal5/stockdweebs-bot/issues) by making an issue.", false);
 		}
 		return embedBuilder.build();
 	}
