@@ -32,6 +32,8 @@ public class CommandListener extends ListenerAdapter {
 			e.getChannel().sendMessage(createEmbed("!commands")).queue();
 		} else if (e.getMessage().getContentRaw().equals("!setup")) {
 			e.getChannel().sendMessage(createEmbed("!setup")).queue();
+		} else if (e.getMessage().getContentRaw().equals("!help")) {
+			e.getChannel().sendMessage(createEmbed("!help")).queue();
 		}
 	}
 
@@ -90,9 +92,13 @@ public class CommandListener extends ListenerAdapter {
 		} else if (input.equals("!setup")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
-			embedBuilder.setDescription("To improve your experience with our services please configure this bot with the following settings. \n \n If you have any questions or suggestions in regards to improving this bot, please contact [us](https://github.com/skhanal5/stockdweebs-bot/issues).");
+			embedBuilder.setDescription("To improve your experience with our services please configure this bot with the following settings: ");
 			embedBuilder.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
-			embedBuilder.addField("!alerts [on/off]", "```\n Turn on post notifications from the StockDweebs twitter and  youtube page. ```", false);
+			embedBuilder.addField("Contact us", "If you have any problems or suggestions regarding this bot, please contact [me](https://github.com/skhanal5/stockdweebs-bot/issues) by making an issue.", false);
+		} else if (input.equals("!help")) {
+			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
+			embedBuilder.setColor(Constants.BRAND_COLOR);
+			embedBuilder.setDescription("If you need assistance with using this bot, view this [link](https://github.com/skhanal5/stockdweebs-bot) for a detailed guide on setting up the bot and descriptions for each of the commands featured with this bot.");
 		}
 		return embedBuilder.build();
 	}

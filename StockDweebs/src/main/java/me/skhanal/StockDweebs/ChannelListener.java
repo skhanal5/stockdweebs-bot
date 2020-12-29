@@ -12,8 +12,8 @@ public class ChannelListener extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent e) {
 		String CHANNEL_INPUT = "";
 		String CHANNEL_ID = "";
-		TextChannel CURR_CHANNEL = null;
 		List<TextChannel> CHANNEL_LIST;
+		TextChannel CURR_CHANNEL = null;
 		String user = e.getAuthor().getName();
 		String guildId = e.getGuild().getId();
 		boolean checkPerms = e.getMember().hasPermission(Permission.ADMINISTRATOR);
@@ -27,7 +27,7 @@ public class ChannelListener extends ListenerAdapter {
 				if (channel.getName().equals(CHANNEL_INPUT)) {
 					CURR_CHANNEL = channel;
 					CHANNEL_ID = channel.getId();
-					JoinEventHandler.database.setChannel(e.getGuild().getId(), CHANNEL_INPUT);
+					JoinEventHandler.database.setChannel(guildId, CHANNEL_INPUT);
 				}
 			}
 			

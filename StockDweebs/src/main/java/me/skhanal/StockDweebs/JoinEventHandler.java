@@ -23,9 +23,9 @@ public class JoinEventHandler extends ListenerAdapter {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 		embed.setColor(Constants.BRAND_COLOR);
-		embed.setDescription("Thank you for adding the StockDweebs Bot to " + e.getGuild().getName() + ". \n To improve your experience with our services please configure this bot with the following settings. \n \n If you have any questions or suggestions in regards to improving this bot, please contact [us](https://github.com/skhanal5/stockdweebs-bot/issues).");
+		embed.setDescription("Thank you for adding the StockDweebs Bot to " + e.getGuild().getName() + ". \n To improve your experience with our services please configure this bot with the following settings:");
 		embed.addField("!setchannel [channelname]", "```\n Set which channel this bot will post messages and alerts on. ```", false);
-		embed.addField("!alerts [on/off]", "```\n Turn on post notifications from the StockDweebs twitter and youtube page. ```", false);
+		embed.addField("Contact me", "If you have any problems or suggestions regarding this bot, please contact [me](https://github.com/skhanal5/stockdweebs-bot/issues) here by making an issue.", false);
 		return embed.build();
 	}
 }
