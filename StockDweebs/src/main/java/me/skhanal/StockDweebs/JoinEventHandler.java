@@ -13,7 +13,7 @@ public class JoinEventHandler extends ListenerAdapter {
 		
 		String guildId = e.getGuild().getId();
 		database.add(e.getGuild().getName(), guildId);
-		database.setChannel(guildId, "null");
+		database.setChannel(guildId, "null", "null");
 		database.setAlerts(guildId, "off");
 		e.getGuild().getDefaultChannel().sendMessage(setupEmbed(e)).queue();
 	}

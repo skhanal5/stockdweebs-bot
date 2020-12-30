@@ -19,7 +19,7 @@ public class PicksListener extends ListenerAdapter{
 	public void onMessageReceived(MessageReceivedEvent e) {
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
-		String definedChannel = JoinEventHandler.database.getChannel(guildId);
+		String definedChannel = JoinEventHandler.database.getChannelName(guildId);
 		
 		if (e.getMessage().getContentRaw().matches("!stockpicks|!watchlist") && (definedChannel.equals("null"))) {
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();

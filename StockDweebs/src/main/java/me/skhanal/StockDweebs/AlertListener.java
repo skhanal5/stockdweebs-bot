@@ -1,10 +1,10 @@
 package me.skhanal.StockDweebs;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import twitter4j.FilterQuery;
@@ -19,7 +19,7 @@ public class AlertListener extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent e) { 	
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
-		String definedChannel = JoinEventHandler.database.getChannel(guildId);
+		String definedChannel = JoinEventHandler.database.getChannelName(guildId);
 		String user = e.getAuthor().getName();
 		boolean checkPerms = e.getMember().hasPermission(Permission.ADMINISTRATOR);
 		
@@ -60,8 +60,7 @@ public class AlertListener extends ListenerAdapter {
 		return embedBuilder.build();
 	}
 	
-	public static void startStream(MessageChannel currChannel, String guildId) {
-		
+	public static void startStream (Guild guild, String guildId) {
 		StatusListener listener = new StatusListener() {
 			
 			@Override
@@ -70,11 +69,12 @@ public class AlertListener extends ListenerAdapter {
 					int startingIndex = status.getText().indexOf("https://");
 					int endingIndex = startingIndex+23;
 					JoinEventHandler.database.setURL(status.getText().substring(startingIndex, endingIndex));
-					
 				}
-                String url = "http://twitter.com/" + status.getUser().getScreenName() + "/status/" + status.getId();
+				
+                String tweet = "http://twitter.com/" + status.getUser().getScreenName() + "/status/" + status.getId();
                 if (JoinEventHandler.database.getAlerts(guildId).equals("on")) {
-                	 currChannel.sendMessage(url).queue();
+                	TextChannel currChannel = guild.getTextChannelById(JoinEventHandler.database.getChannelID(guildId));
+                	currChannel.sendMessage(tweet).queue();
                 }
             }
 			
