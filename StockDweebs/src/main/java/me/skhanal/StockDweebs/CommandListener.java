@@ -14,7 +14,7 @@ public class CommandListener extends ListenerAdapter {
 		
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
-		String definedChannel = JoinEventHandler.database.getChannelName(guildId);
+		String definedChannel = JoinEventListener.database.getChannelName(guildId);
 		
 		if (e.getMessage().getContentRaw().matches("!invite|!youtube|!twitter|!premium") && (definedChannel.equals("null"))){
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();

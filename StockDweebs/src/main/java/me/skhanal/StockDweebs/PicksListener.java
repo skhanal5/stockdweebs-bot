@@ -13,13 +13,11 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class PicksListener extends ListenerAdapter{
 	
-	public static String DROPBOX_URL = "";
-	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
-		String definedChannel = JoinEventHandler.database.getChannelName(guildId);
+		String definedChannel = JoinEventListener.database.getChannelName(guildId);
 		
 		if (e.getMessage().getContentRaw().matches("!stockpicks|!watchlist") && (definedChannel.equals("null"))) {
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
@@ -36,19 +34,19 @@ public class PicksListener extends ListenerAdapter{
 		LocalDate date = LocalDate.now(ZoneId.of("America/Montreal")).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 		String currWeek = date.format(formatter);
-		String currURL = JoinEventHandler.database.getURL();
+		String currURL = JoinEventListener.database.getURL();
 		
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		if (input.equals("!stockpicks")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setDescription("You can view the stockpicks for this week here: " + "\n" + "[StockDweebs - Weekly Lists - " + currWeek + "](" + currURL + ")" + "\n\n" + "Shared with Dropbox");
-			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/TtMXwofJhLzXyMUKbDXite1frG79TKNbxlE63y0BrcI/https/www.dropbox.com/static/images/spectrum-icons/generated/content/content-pdf-large.png"); 
+			embedBuilder.setThumbnail(Constants.PDF_LOGO); 
 		} else if (input.equals("!watchlist")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
 			embedBuilder.setDescription("You can view the watchlist for this week here: " + "\n" + "[StockDweebs - Weekly Lists - " + currWeek + "](" + currURL + ")" + "\n\n" + "Shared with Dropbox");
-			embedBuilder.setThumbnail("https://images-ext-1.discordapp.net/external/TtMXwofJhLzXyMUKbDXite1frG79TKNbxlE63y0BrcI/https/www.dropbox.com/static/images/spectrum-icons/generated/content/content-pdf-large.png");
+			embedBuilder.setThumbnail(Constants.PDF_LOGO);
 		}
 		return embedBuilder.build();
 	}

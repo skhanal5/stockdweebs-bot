@@ -22,13 +22,13 @@ public class ChannelListener extends ListenerAdapter {
 			e.getChannel().sendMessage("Invalid command or channel name. To use this command type !setchannel and the channel name following that statement with a space. If you need additional assistance, refer to !setup for help.").queue();
 		} else if ((e.getMessage().getContentRaw().startsWith("!setchannel") && (!checkPerms))) {
 			e.getChannel().sendMessage("User: " + user + " does not have valid permissions to use this command.").queue();
-		} else if (e.getMessage().getContentRaw().startsWith("!setchannel") && (!(JoinEventHandler.database.getChannelName(guildId).equals("null")))) { 
+		} else if (e.getMessage().getContentRaw().startsWith("!setchannel") && (!(JoinEventListener.database.getChannelName(guildId).equals("null")))) { 
 			CHANNEL_INPUT = e.getMessage().getContentRaw().substring(12,e.getMessage().getContentRaw().length());
 			CHANNEL_LIST = e.getGuild().getTextChannels();
 			for(TextChannel channel: CHANNEL_LIST) {
 				if (channel.getName().equals(CHANNEL_INPUT)) {
 					CHANNEL_ID = channel.getId();
-					JoinEventHandler.database.setChannel(guildId, CHANNEL_INPUT, CHANNEL_ID);
+					JoinEventListener.database.setChannel(guildId, CHANNEL_INPUT, CHANNEL_ID);
 				}
 			}
 			
@@ -49,7 +49,7 @@ public class ChannelListener extends ListenerAdapter {
 			for(TextChannel channel: CHANNEL_LIST) {
 				if (channel.getName().equals(CHANNEL_INPUT)) {
 					CHANNEL_ID = channel.getId();
-					JoinEventHandler.database.setChannel(guildId, CHANNEL_INPUT, CHANNEL_ID);
+					JoinEventListener.database.setChannel(guildId, CHANNEL_INPUT, CHANNEL_ID);
 				}
 			}
 			
