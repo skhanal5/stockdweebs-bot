@@ -1,1 +1,1 @@
-worker: java worker: java -jar target/<nameofjar.jar>
+worker: java worker: java -jar target/<jar-with-dependencies.jar>
