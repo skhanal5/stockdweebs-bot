@@ -1,1 +1,1 @@
-worker: java src/main/java/me/skhanal/StockDweebs/Driver.java
+worker: java src/main/me/skhanal/StockDweebs/Driver.java
