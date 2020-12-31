@@ -8,13 +8,7 @@
 	<groupId>me.skhanal</groupId>
 	<artifactId>StockDweebs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
-	<properties>
-		<maven-compiler-plugin.source>8</maven-compiler-plugin.source>
-		<maven-compiler-plugin.target>8</maven-compiler-plugin.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
+	
 	<repositories>
 		<repository>
 			<snapshots>
@@ -25,7 +19,6 @@
 			<url>https://jcenter.bintray.com</url>
 		</repository>
 	</repositories>
-
 
 	<dependencies>
 		<dependency>
@@ -62,50 +55,6 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.4.3</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								<excludes>
-									<exclude>example</exclude> <!-- You may add jars to exclude from shading -->
-								</excludes>
-							</artifactSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>me.skhanal.StockDweebs.Driver</mainClass>
-						</manifest>
-					</archive>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id> <!-- this is used for inheritance merges -->
-						<phase>package</phase> <!-- bind to the packaging phase -->
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
