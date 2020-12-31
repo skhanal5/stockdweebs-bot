@@ -1,1 +1,1 @@
-worker: java src/main/java/me/skhanal/StockDweebs/Driver.java
+worker: java worker: java -jar target/<nameofjar.jar>
