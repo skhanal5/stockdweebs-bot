@@ -56,6 +56,7 @@ I am currently working on adding comments and making the code more comprehensive
 * [JDA](https://github.com/DV8FromTheWorld/JDA) - Utilized wrapper to directly have access to Discord API
 * [Twitter4J](http://twitter4j.org/en/) - Used for Twitter integration into the Discord bot
 * [MongoDB](https://www.mongodb.com/) - Used cloud based database to store discord server information
+* [Heroku](https://dashboard.heroku.com/apps) - Used to deploy bot online 24/7
 
 ## Acknowledgements
 * [Xemor](https://www.youtube.com/watch?v=MEnYZriBQ9k&list=PLI4ARPbf7eAWlsIBlZxCJSBijMxdDkfdo) - Utilized guides for project initialization and offered assistance with JDA library
