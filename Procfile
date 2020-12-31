@@ -1,1 +1,1 @@
-worker: java worker: java -jar target/<jar-with-dependencies.jar>
+worker: java worker: java -jar target/<StockDweebs-0.0.1-SNAPSHOT-jar-with-dependencies.jar>
