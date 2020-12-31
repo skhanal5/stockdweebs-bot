@@ -6,12 +6,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-		<attributes>
-			<attribute name="module" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/net/dv8tion/JDA/4.2.0_222/JDA-4.2.0_222.jar" sourcepath="M2_REPO/net/dv8tion/JDA/4.2.0_222/JDA-4.2.0_222-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar" sourcepath="M2_REPO/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jetbrains/annotations/16.0.1/annotations-16.0.1.jar" sourcepath="M2_REPO/org/jetbrains/annotations/16.0.1/annotations-16.0.1-sources.jar"/>
@@ -34,14 +28,21 @@
 	<classpathentry kind="var" path="M2_REPO/org/mongodb/mongodb-driver-core/4.2.0-beta1/mongodb-driver-core-4.2.0-beta1.jar" sourcepath="M2_REPO/org/mongodb/mongodb-driver-core/4.2.0-beta1/mongodb-driver-core-4.2.0-beta1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/twitter4j/twitter4j-stream/4.0.6/twitter4j-stream-4.0.6.jar" sourcepath="M2_REPO/org/twitter4j/twitter4j-stream/4.0.6/twitter4j-stream-4.0.6-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/twitter4j/twitter4j-core/4.0.6/twitter4j-core-4.0.6.jar" sourcepath="M2_REPO/org/twitter4j/twitter4j-core/4.0.6/twitter4j-core-4.0.6-sources.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
-			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
