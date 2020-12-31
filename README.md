@@ -14,7 +14,7 @@ I am not associated with or sponsored by the StockDweebs brand in any way, shape
 
 ## Setting up the Bot in Discord
 
-In order to add this discord bot to your discord server, use this [invite link]. Once it joins the server, the bot should prompt the user with this message:
+In order to add this discord bot to your discord server, use this [invite link](https://discord.com/oauth2/authorize?client_id=780691100964356146&permissions=8&scope=bot). Once it joins the server, the bot should prompt the user with this message:
 
 ![image](https://user-images.githubusercontent.com/74752121/103317153-a7bf9600-49f8-11eb-958d-a1107d164c3d.png)
 
@@ -56,6 +56,7 @@ I am currently working on adding comments and making the code more comprehensive
 * [JDA](https://github.com/DV8FromTheWorld/JDA) - Utilized wrapper to directly have access to Discord API
 * [Twitter4J](http://twitter4j.org/en/) - Used for Twitter integration into the Discord bot
 * [MongoDB](https://www.mongodb.com/) - Used cloud based database to store discord server information
+* [Heroku](https://dashboard.heroku.com/apps) - Used to deploy bot online 24/7
 
 ## Acknowledgements
 * [Xemor](https://www.youtube.com/watch?v=MEnYZriBQ9k&list=PLI4ARPbf7eAWlsIBlZxCJSBijMxdDkfdo) - Utilized guides for project initialization and offered assistance with JDA library
