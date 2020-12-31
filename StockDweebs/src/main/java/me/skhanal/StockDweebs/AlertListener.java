@@ -104,9 +104,9 @@ public class AlertListener extends ListenerAdapter {
             }
 		};
 		
-		Driver.twitterStream.addListener(listener);
+		BotInitializer.twitterStream.addListener(listener);
 		FilterQuery query = new FilterQuery();
 		query.follow(Constants.TWITTER_ID);
-		Driver.twitterStream.filter(query);
+		BotInitializer.twitterStream.filter(query);
 	}
 }
