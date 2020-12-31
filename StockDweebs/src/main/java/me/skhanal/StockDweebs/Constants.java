@@ -14,7 +14,7 @@ public final class Constants {
 	public static final String CONSUMER_SECRET = System.getenv("CONSUMER_SECRET");
 	public static final String LIST_DOC = System.getenv("LIST_DOC");
 	
-	public static final long TWITTER_ID = 762836089732083712L;
+	public static final long TWITTER_ID = 1260551652479647745L;
 	public static final Color BRAND_COLOR = new Color(103, 114, 229);
 	public static final String TWITTER_LOGO = "https://www.sfcg.org/wp-content/uploads/2016/11/twitter-flat.png";
 	public static final String YOUTUBE_LOGO = "https://www.sfcg.org/wp-content/uploads/2016/11/youtube-flat.png";
