@@ -3,6 +3,7 @@ package me.skhanal.StockDweebs;
 import java.awt.Color;
 
 public final class Constants {
+	
 	public static final String BOT_TOKEN = System.getenv("BOT_TOKEN");
 	public static final String INVITE_LINK = System.getenv("INVITE_LINK");
 	public static final String CLIENT_URL = System.getenv("CLIENT_URL");

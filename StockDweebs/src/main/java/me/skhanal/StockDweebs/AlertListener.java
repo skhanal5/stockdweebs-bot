@@ -71,8 +71,8 @@ public class AlertListener extends ListenerAdapter {
 					JoinEventListener.database.setURL(status.getText().substring(startingIndex, endingIndex));
 				}
 				
-                String tweet = "http://twitter.com/" + status.getUser().getScreenName() + "/status/" + status.getId();
-                if (JoinEventListener.database.getAlerts(guildId).equals("on")) {
+                if (JoinEventListener.database.getAlerts(guildId).equals("on") && status.getUser().getId() == Constants.TWITTER_ID) {
+                    String tweet = "http://twitter.com/" + status.getUser().getScreenName() + "/status/" + status.getId();
                 	TextChannel currChannel = guild.getTextChannelById(JoinEventListener.database.getChannelID(guildId));
                 	currChannel.sendMessage(tweet).queue();
                 }
