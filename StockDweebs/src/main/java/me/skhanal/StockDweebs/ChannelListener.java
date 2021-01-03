@@ -56,6 +56,7 @@ public class ChannelListener extends ListenerAdapter {
 			try {
 				e.getGuild().getTextChannelById(CHANNEL_ID).sendMessage("This bot will now post alerts and messages in this channel.").queue();
 				e.getChannel().sendMessage("All messages from this bot will now be posted in #" + CHANNEL_INPUT + ".").queue();
+				AlertListener.startStream(e.getGuild(), guildId);
 			} catch (NumberFormatException g) {
 				e.getChannel().sendMessage("Invalid command or channel name. To use this command type !setchannel and the channel name following that statement with a space. If you need additional assistance, refer to !setup for help.").queue();
 			} catch (IllegalArgumentException g) {
@@ -63,9 +64,6 @@ public class ChannelListener extends ListenerAdapter {
 			} catch (NullPointerException g) {
 				e.getChannel().sendMessage("Invalid command or channel name. To use this command type !setchannel and the channel name following that statement with a space. If you need additional assistance, refer to !setup for help.").queue();
 			} 
-			
-			AlertListener.startStream(e.getGuild(), guildId);
-	
 		}
 	}
 }

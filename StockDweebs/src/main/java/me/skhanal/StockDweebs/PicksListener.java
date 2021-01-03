@@ -31,7 +31,7 @@ public class PicksListener extends ListenerAdapter{
 	}
 	
 	private MessageEmbed createEmbed(String input) {
-		LocalDate date = LocalDate.now(ZoneId.of("America/Montreal")).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+		LocalDate date = LocalDate.now(ZoneId.of("America/Montreal")).with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 		String currWeek = date.format(formatter);
 		String currURL = JoinEventListener.database.getURL();
