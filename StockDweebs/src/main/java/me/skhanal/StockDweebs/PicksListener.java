@@ -11,7 +11,19 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/*
+ * This class will listen to the !watchlist and !stockpick commands 
+ * and respond with this week's watchlist and stockpicks if the command
+ * was used as intended.
+ */
+
 public class PicksListener extends ListenerAdapter{
+	
+	/*
+	 * This method will listen for the command and if the command was used
+	 * as intended then an embedded message will be sent otherwise an error
+	 * message will be sent.
+	 */
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
@@ -30,7 +42,19 @@ public class PicksListener extends ListenerAdapter{
 		}
 	}
 	
+	/*
+	 * This method below will construct the embedded message containing the
+	 * link to the dropbox page with the document.
+	 */
+	
 	private MessageEmbed createEmbed(String input) {
+		
+		/*
+		 * The lines below checks for the current date and will set it to the
+		 * current Sunday to inform the user that the watchlist/stockpicks list
+		 * is intended for that entire week.
+		 */
+		
 		LocalDate date = LocalDate.now(ZoneId.of("America/Montreal")).with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 		String currWeek = date.format(formatter);

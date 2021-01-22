@@ -7,7 +7,18 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/*
+ * This listener class contains all of the general and more basic text commands 
+ * that the bot will need to listen for.
+ */
+
 public class CommandListener extends ListenerAdapter {
+	
+	/*
+	 * The method below will make the bot actively listen to the command
+	 * keywords and respond in the appropriate channel with an embedded message
+	 * by using the createEmbed method
+	 */
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
@@ -15,6 +26,10 @@ public class CommandListener extends ListenerAdapter {
 		String guildId = e.getGuild().getId();
 		String currChannel = e.getTextChannel().getName();
 		String definedChannel = JoinEventListener.database.getChannelName(guildId);
+		
+		/*
+		 * This first conditional statement checks if the bot was configured properly
+		 */
 		
 		if (e.getMessage().getContentRaw().matches("!invite|!youtube|!twitter|!premium") && (definedChannel.equals("null"))){
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
@@ -37,8 +52,14 @@ public class CommandListener extends ListenerAdapter {
 		}
 	}
 
+	/*
+	 * The method below makes use of the embed builder which will allow us to 
+	 * send messages with a higher range of customization. Depending on the
+	 * command, the bot will respond with a unique embed as a response.
+	 */
+	
 	private MessageEmbed createEmbed(String input) {
-		EmbedBuilder embedBuilder = new EmbedBuilder();
+		EmbedBuilder embedBuilder = new EmbedBuilder(); //creates an instance of the embedbuilder
 		
 		if (input.equals("!youtube")) {
 			embedBuilder.setAuthor("Youtube", null, Constants.YOUTUBE_LOGO);
@@ -112,7 +133,7 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.addBlankField(true);
 			embedBuilder.addField("Contact me", "If you have any problems or suggestions regarding this bot, please contact [me](https://github.com/skhanal5/stockdweebs-bot/issues) by making an issue.", false);
 		}
-		return embedBuilder.build();
+		return embedBuilder.build(); //returns the created embed so that the bot can send it in the previous method to the appropriate channel
 	}
 
 }

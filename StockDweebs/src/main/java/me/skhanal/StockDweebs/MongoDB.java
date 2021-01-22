@@ -17,6 +17,7 @@ public class MongoDB {
 	private static MongoClient mongoClient;
 	private static MongoDatabase database;
 	private static MongoCollection<Document> guildInfo;
+	
 	//initializes static fields
 	static {
 		mongoClient = MongoClients.create(Constants.CLIENT_URL);
