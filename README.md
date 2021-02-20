@@ -32,8 +32,8 @@ This bot currently supports the commands listed below:
 * !twitter - posts a link to the StockDweebs twitter account
 * !youtube - posts a link to the StockDweebs youtube channel
 * !help - posts clarification on how to use the bot
-* !stockpicks - posts a link to the dropbox page containing this week's stockpicks
-* !watchlist - posts a link to the dropbox page containing this week's watchlist
+* !stockpicks - posts a link to the page on StockDweebs' website containing this week's stock picks
+* !pastpicks - posts a link to the page on StockDweebs' website containing previous weeks stock picks.
 * !premium - contains information regarding premium services 
 * !commands - showcases a list of all of the supported commands
 * !invite - posts invite link that can be used to add this bot into other discord servers
