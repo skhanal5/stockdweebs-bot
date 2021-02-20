@@ -55,7 +55,10 @@ public class AlertListener extends ListenerAdapter {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + definedChannel + " channel. Please use this command in that channel").queue();
 		} else if (e.getMessage().getContentRaw().equals("!alerts on") && (definedChannel.equals(currChannel) && (JoinEventListener.database.getAlerts(guildId).equals("on")))) {
 			e.getChannel().sendMessage("Alerts are already on for the channel: " + definedChannel + ".").queue();
+		} else if (e.getMessage().getContentRaw().equals("!alerts off") && (definedChannel.equals(currChannel) && (JoinEventListener.database.getAlerts(guildId).equals("off")))) {
+			e.getChannel().sendMessage("Alerts are already off for the channel: " + definedChannel + ".").queue();
 		} else if (e.getMessage().getContentRaw().equals("!alerts on")) {
+			AlertListener.startStream(e.getGuild(), guildId);
 			e.getChannel().sendMessage(alertEmbed(e, true)).queue();
 			JoinEventListener.database.setAlerts(guildId, "on"); //stores the alert setting in the database
 		} else if (e.getMessage().getContentRaw().equals("!alerts off") && (JoinEventListener.database.getAlerts(guildId).equals("on"))) {
@@ -103,7 +106,7 @@ public class AlertListener extends ListenerAdapter {
 				 * in the database 
 				 */
 				
-				if (status.getText().contains("View the report") && status.getUser().getId() == Constants.TWITTER_ID) {
+				if (status.getText().contains("View the analysis") && status.getUser().getId() == Constants.TWITTER_ID) {
 					int startingIndex = status.getText().indexOf("https://");
 					int endingIndex = startingIndex+23;
 					JoinEventListener.database.setURL(status.getText().substring(startingIndex, endingIndex));

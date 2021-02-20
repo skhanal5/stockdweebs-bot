@@ -93,7 +93,7 @@ public class ChannelListener extends ListenerAdapter {
 			try {
 				e.getGuild().getTextChannelById(CHANNEL_ID).sendMessage("This bot will now post alerts and messages in this channel.").queue();
 				e.getChannel().sendMessage("All messages from this bot will now be posted in #" + CHANNEL_INPUT + ".").queue();
-				AlertListener.startStream(e.getGuild(), guildId); //starts the twitter stream in the background but does not post tweets - will be used later
+			//	AlertListener.startStream(e.getGuild(), guildId); //starts the twitter stream in the background but does not post tweets - will be used later
 			} catch (NumberFormatException g) {
 				e.getChannel().sendMessage("Invalid command or channel name. To use this command type !setchannel and the channel name following that statement with a space. If you need additional assistance, refer to !setup for help.").queue();
 			} catch (IllegalArgumentException g) {

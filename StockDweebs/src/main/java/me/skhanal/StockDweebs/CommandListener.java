@@ -31,7 +31,7 @@ public class CommandListener extends ListenerAdapter {
 		 * This first conditional statement checks if the bot was configured properly
 		 */
 		
-		if (e.getMessage().getContentRaw().matches("!invite|!youtube|!twitter|!premium") && (definedChannel.equals("null"))){
+		if (e.getMessage().getContentRaw().matches("!invite|!youtube|!twitter|!premium|!pastpicks") && (definedChannel.equals("null"))){
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
 		} else if (e.getMessage().getContentRaw().matches("!invite|!youtube|!twitter|!premium") && (!(definedChannel.equals(currChannel)))) {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + definedChannel + " channel. Please use this command in that channel").queue();
@@ -49,6 +49,8 @@ public class CommandListener extends ListenerAdapter {
 			e.getChannel().sendMessage(createEmbed("!setup")).queue();
 		} else if (e.getMessage().getContentRaw().equals("!help")) {
 			e.getChannel().sendMessage(createEmbed("!help")).queue();
+		} else if (e.getMessage().getContentDisplay().equals("!pastpicks")) {
+			e.getChannel().sendMessage(createEmbed("!pastpicks")).queue();
 		}
 	}
 
@@ -93,8 +95,8 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setAuthor("StockDweebs Command List", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
-			embedBuilder.addField("Weekly Watchlist", "```\n !watchlist```", false);
-			embedBuilder.addField("Weekly Stockpicks", "```\n !stockpicks```", false);
+			embedBuilder.addField("Weekly Stock Picks", "```\n !stockpicks```", false);
+			embedBuilder.addField("Past Stock Picks", "```\n !pastpicks```", false);
 			embedBuilder.addField("Premium Membership", "```\n !premium```", false);
 			embedBuilder.addField("Set Channel", "```\n !setchannel [channelname]```", false);
 			embedBuilder.addField("Alerts", "```\n !alerts [on/off]```", false);
@@ -108,8 +110,15 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.setTitle("Add this bot to your other servers!", Constants.INVITE_LINK);
 		} else if (input.equals("!premium")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
+			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
-			embedBuilder.setDescription("Premium subscription service will be coming soon. Stay tuned for updates on my [social media](https://twitter.com/StockDweebs)!");
+			embedBuilder.setDescription("Dweeb Premium gives you access to the full-suite of stock picks helping you "
+					+ "achieve your financial goals. Become a professional Dweeb [here](https://www.stockdweebs.com/signup)");
+		} else if (input.equals("!pastpicks")) {
+			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
+			embedBuilder.setColor(Constants.BRAND_COLOR);
+			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO);
+			embedBuilder.setDescription("[View](https://www.stockdweebs.com/weekly-picks) the stocks that were considered from the previous four weeks worth of stock picks. Contains data for every stock so you can evaluate those picks for yourself.");
 		} else if (input.equals("!setup")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
@@ -126,8 +135,8 @@ public class CommandListener extends ListenerAdapter {
 			embedBuilder.addField("!twitter", "*View the official StockDweebs Twitter page*", false);
 			embedBuilder.addField("!youtube", "*View the official StockDweebs Youtube channel*", false);
 			embedBuilder.addField("!premium", "*Posts information regarding premium subscription*", false);
-			embedBuilder.addField("!watchlist", "*Shows this week's watchlist*", false);
-			embedBuilder.addField("!stockpicks", "*Shows this week's stockpicks*", false);
+			embedBuilder.addField("!pastpicks", "*Shows past four weeks of stock picks*", false);
+			embedBuilder.addField("!stockpicks", "*Shows this week's stock picks*", false);
 			embedBuilder.addField("!invite", "*Posts invite link for this bot*", false);
 			embedBuilder.addField("!commands", "*Posts full command list*", false);
 			embedBuilder.addBlankField(true);

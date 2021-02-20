@@ -12,9 +12,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /*
- * This class will listen to the !watchlist and !stockpick commands 
- * and respond with this week's watchlist and stockpicks if the command
- * was used as intended.
+ * This class will listen to the !stockpicks and respond with this week's 
+ * stockpicks  if the command was used as intended.
  */
 
 public class PicksListener extends ListenerAdapter{
@@ -31,27 +30,25 @@ public class PicksListener extends ListenerAdapter{
 		String currChannel = e.getTextChannel().getName();
 		String definedChannel = JoinEventListener.database.getChannelName(guildId);
 		
-		if (e.getMessage().getContentRaw().matches("!stockpicks|!watchlist") && (definedChannel.equals("null"))) {
+		if (e.getMessage().getContentRaw().equals("!stockpicks") && (definedChannel.equals("null"))) {
 			e.getChannel().sendMessage("You have not setup a channel for this bot to send alerts and messages on. Please do so immediately using the !setchannel command. If you need additional assistance, refer to !setup for help.").queue();
-		} else if (e.getMessage().getContentRaw().matches("!stockpicks|!watchlist") && (!(definedChannel.equals(currChannel)))) {
+		} else if (e.getMessage().getContentRaw().equals("!stockpicks") && (!(definedChannel.equals(currChannel)))) {
 			e.getChannel().sendMessage("Channel mismatch. The bot is currently set to the #" + definedChannel + " channel. Please use this command in that channel").queue();
-		} else if (e.getMessage().getContentRaw().matches("!stockpicks")) {
+		} else if (e.getMessage().getContentRaw().equals("!stockpicks")) {
 			e.getChannel().sendMessage(createEmbed("!stockpicks")).queue();
-		} else if (e.getMessage().getContentRaw().matches("!watchlist")) {
-			e.getChannel().sendMessage(createEmbed("!watchlist")).queue();
 		}
 	}
 	
 	/*
 	 * This method below will construct the embedded message containing the
-	 * link to the dropbox page with the document.
+	 * link to website containing the stockpicks.
 	 */
 	
 	private MessageEmbed createEmbed(String input) {
 		
 		/*
 		 * The lines below checks for the current date and will set it to the
-		 * current Sunday to inform the user that the watchlist/stockpicks list
+		 * current Sunday to inform the user that the stockpicks list
 		 * is intended for that entire week.
 		 */
 		
@@ -64,13 +61,8 @@ public class PicksListener extends ListenerAdapter{
 		if (input.equals("!stockpicks")) {
 			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
 			embedBuilder.setColor(Constants.BRAND_COLOR);
-			embedBuilder.setDescription("You can view the stockpicks for this week here: " + "\n" + "[StockDweebs - Weekly Lists - " + currWeek + "](" + currURL + ")" + "\n\n" + "Shared with Dropbox");
-			embedBuilder.setThumbnail(Constants.PDF_LOGO); 
-		} else if (input.equals("!watchlist")) {
-			embedBuilder.setAuthor("StockDweebs Bot", null, Constants.STOCKDWEEBS_LOGO);
-			embedBuilder.setColor(Constants.BRAND_COLOR);
-			embedBuilder.setDescription("You can view the watchlist for this week here: " + "\n" + "[StockDweebs - Weekly Lists - " + currWeek + "](" + currURL + ")" + "\n\n" + "Shared with Dropbox");
-			embedBuilder.setThumbnail(Constants.PDF_LOGO);
+			embedBuilder.setDescription("You can view the stockpicks for this week here: " + "\n" + "[StockDweebs - Weekly Stock Picks - " + currWeek + "](" + currURL + ")" + "\n\n" + "Powered by StockDweebs");
+			embedBuilder.setThumbnail(Constants.STOCKDWEEBS_LOGO); 
 		}
 		return embedBuilder.build();
 	}
